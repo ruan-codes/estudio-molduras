@@ -12,6 +12,7 @@ import { frames as builtInFrames } from './data/frames.js'
 export default function App() {
   const videoRef = useRef(null)
   const canvasRef = useRef(null)
+  const printImgRef = useRef(null)
   const photoFileInputRef = useRef(null)
   const frameFileInputRef = useRef(null)
 
@@ -38,6 +39,9 @@ export default function App() {
       if (!photoImg || !canvasRef.current) return
       const frameImg = activeFrame ? await loadImage(activeFrame.src) : null
       renderComposite({ canvas: canvasRef.current, photoImg, frameImg, caption })
+      if (printImgRef.current) {
+        printImgRef.current.src = canvasRef.current.toDataURL('image/png')
+      }
       setHasResult(true)
     }
     run()
@@ -93,6 +97,11 @@ export default function App() {
     link.click()
   }
 
+  function handlePrint() {
+    if (!hasResult) return
+    window.print()
+  }
+
   const frameIndex = allFrames.findIndex((f) => f.id === activeFrameId)
   const frameCounterLabel = `QUADRO ${String(frameIndex + 1).padStart(2, '0')}`
 
@@ -119,6 +128,7 @@ export default function App() {
             onFileSelected={handleFileSelected}
             onShoot={handleShoot}
             onDownload={handleDownload}
+            onPrint={handlePrint}
             canShoot={cameraActive}
             canDownload={hasResult}
             fileInputRef={photoFileInputRef}
@@ -135,6 +145,9 @@ export default function App() {
           fileInputRef={frameFileInputRef}
         />
       </div>
+
+      {/* Usada só durante a impressão — fica escondida na tela normal (ver .print-only no CSS) */}
+      <img ref={printImgRef} className="print-only" alt="" />
 
       <Footer />
     </div>

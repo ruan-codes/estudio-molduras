@@ -463,3 +463,26 @@ input[type='file'] {
   color: rgba(244, 239, 228, 0.3);
   letter-spacing: 0.05em;
 }
+
+/* Impressão: some com a interface inteira e mostra só a foto final */
+.print-only {
+  display: none;
+}
+@media print {
+  @page {
+    margin: 1cm;
+  }
+  body * {
+    visibility: hidden;
+  }
+  .print-only {
+    display: block;
+    visibility: visible;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-height: 100vh;
+    object-fit: contain;
+  }
+}

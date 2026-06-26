@@ -6,6 +6,7 @@ export default function Controls({
   onFileSelected,
   onShoot,
   onDownload,
+  onPrint,
   canShoot,
   canDownload,
   fileInputRef,
@@ -41,6 +42,9 @@ export default function Controls({
         </button>
         <button className="btn-cyan" onClick={onDownload} disabled={!canDownload}>
           Baixar PNG
+        </button>
+        <button className="btn-ghost btn-icon" onClick={onPrint} disabled={!canDownload} aria-label="Imprimir foto">
+          🖨️
         </button>
       </div>
     </>
