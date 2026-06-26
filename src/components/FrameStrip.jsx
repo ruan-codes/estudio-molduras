@@ -1,0 +1,46 @@
+export default function FrameStrip({ frames, activeFrameId, onSelect, onUploadFrame, fileInputRef }) {
+  return (
+    <div className="strip-panel">
+      <div className="strip-title">
+        <span>Tira de molduras</span>
+        <span>{frames.length} quadros</span>
+      </div>
+
+      <div className="filmstrip">
+        {frames.map((frame, i) => (
+          <button
+            key={frame.id}
+            className={`frame-option ${frame.id === activeFrameId ? 'active' : ''}`}
+            onClick={() => onSelect(frame.id)}
+          >
+            <span className="sprocket-num">{String(i + 1).padStart(2, '0')}</span>
+            <span className="swatch">
+              <img src={frame.src} alt="" />
+            </span>
+            <span>
+              <div className="name">{frame.name}</div>
+              <div className="desc">{frame.desc}</div>
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <div className="upload-frame-row">
+        <button className="btn-ghost" style={{ width: '100%' }} onClick={() => fileInputRef.current?.click()}>
+          + Adicionar minha moldura (PNG)
+        </button>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/png"
+          onChange={(e) => {
+            const file = e.target.files?.[0]
+            if (file) onUploadFrame(file)
+            e.target.value = ''
+          }}
+        />
+        <div className="upload-frame-hint">PNG com fundo transparente no centro funciona melhor.</div>
+      </div>
+    </div>
+  )
+}
