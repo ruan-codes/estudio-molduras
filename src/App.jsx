@@ -15,7 +15,13 @@ export default function App() {
   const photoFileInputRef = useRef(null)
   const frameFileInputRef = useRef(null)
 
-  const { active: cameraActive, start: startCamera, stop: stopCamera } = useCamera(videoRef)
+  const {
+    active: cameraActive,
+    facingMode,
+    start: startCamera,
+    stop: stopCamera,
+    switchCamera,
+  } = useCamera(videoRef)
 
   const [photoImg, setPhotoImg] = useState(null) // HTMLImageElement da foto atual
   const [customFrames, setCustomFrames] = useState([])
@@ -51,7 +57,7 @@ export default function App() {
   }
 
   async function handleShoot() {
-    const img = await captureVideoFrame(videoRef.current)
+    const img = await captureVideoFrame(videoRef.current, facingMode === 'user')
     setPhotoImg(img)
     stopCamera()
   }
@@ -102,11 +108,13 @@ export default function App() {
             cameraActive={cameraActive}
             hasResult={hasResult}
             frameCounterLabel={frameCounterLabel}
+            mirrorPreview={cameraActive && facingMode === 'user'}
           />
 
           <Controls
             cameraActive={cameraActive}
             onToggleCamera={handleToggleCamera}
+            onSwitchCamera={switchCamera}
             onUploadClick={handleUploadClick}
             onFileSelected={handleFileSelected}
             onShoot={handleShoot}

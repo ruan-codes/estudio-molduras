@@ -60,10 +60,15 @@ export function renderComposite({ canvas, photoImg, frameImg, caption, maxWidth 
 }
 
 // Captura um frame do <video> e devolve um HTMLImageElement
-export function captureVideoFrame(video) {
+export function captureVideoFrame(video, mirror = false) {
   const tmp = document.createElement('canvas')
   tmp.width = video.videoWidth
   tmp.height = video.videoHeight
-  tmp.getContext('2d').drawImage(video, 0, 0)
+  const ctx = tmp.getContext('2d')
+  if (mirror) {
+    ctx.translate(tmp.width, 0)
+    ctx.scale(-1, 1)
+  }
+  ctx.drawImage(video, 0, 0)
   return loadImage(tmp.toDataURL('image/png'))
 }

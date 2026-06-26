@@ -1,6 +1,7 @@
 export default function Controls({
   cameraActive,
   onToggleCamera,
+  onSwitchCamera,
   onUploadClick,
   onFileSelected,
   onShoot,
@@ -15,6 +16,11 @@ export default function Controls({
         <button className="btn-ghost" onClick={onToggleCamera}>
           {cameraActive ? '⏹ Desligar câmera' : '📷 Ligar câmera'}
         </button>
+        {cameraActive && (
+          <button className="btn-ghost btn-icon" onClick={onSwitchCamera} aria-label="Trocar câmera">
+            🔄
+          </button>
+        )}
         <button className="btn-ghost" onClick={onUploadClick}>
           ⬆ Enviar foto
         </button>
@@ -29,7 +35,7 @@ export default function Controls({
           }}
         />
       </div>
-      <div className="controls">
+      <div className="controls controls-primary">
         <button className="btn-primary" onClick={onShoot} disabled={!canShoot}>
           Capturar
         </button>

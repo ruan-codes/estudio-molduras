@@ -1,4 +1,4 @@
-export default function Viewfinder({ videoRef, canvasRef, cameraActive, hasResult, frameCounterLabel }) {
+export default function Viewfinder({ videoRef, canvasRef, cameraActive, hasResult, frameCounterLabel, mirrorPreview }) {
   const showEmpty = !cameraActive && !hasResult
 
   return (
@@ -12,7 +12,16 @@ export default function Viewfinder({ videoRef, canvasRef, cameraActive, hasResul
       </div>
 
       <div className="vf-frame">
-        <video ref={videoRef} autoPlay playsInline style={{ display: cameraActive ? 'block' : 'none' }} />
+        <video
+          ref={videoRef}
+          autoPlay
+          playsInline
+          muted
+          style={{
+            display: cameraActive ? 'block' : 'none',
+            transform: mirrorPreview ? 'scaleX(-1)' : 'none',
+          }}
+        />
         <canvas ref={canvasRef} style={{ display: hasResult ? 'block' : 'none' }} />
 
         {showEmpty && (
