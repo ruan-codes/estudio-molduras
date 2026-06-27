@@ -1,0 +1,51 @@
+<svg width="1000" height="1250" viewBox="0 0 1000 1250" xmlns="http://www.w3.org/2000/svg">
+  <!-- borda tipo pisca-pisca em forma de "cordão" no topo -->
+  <path d="M20 50 Q 250 20, 500 50 T 980 50" stroke="#2F5D3A" stroke-width="5" fill="none"/>
+  <g>
+    <circle cx="80" cy="48" r="13" fill="#C23B3B"/>
+    <circle cx="220" cy="34" r="13" fill="#D9A93B"/>
+    <circle cx="360" cy="46" r="13" fill="#2F5D3A"/>
+    <circle cx="500" cy="50" r="13" fill="#C23B3B"/>
+    <circle cx="640" cy="46" r="13" fill="#D9A93B"/>
+    <circle cx="780" cy="34" r="13" fill="#2F5D3A"/>
+    <circle cx="920" cy="48" r="13" fill="#C23B3B"/>
+  </g>
+
+  <!-- borda lateral tipo bastão de doce (vermelho/verde alternado) -->
+  <g stroke-width="10" fill="none">
+    <line x1="34" y1="80" x2="34" y2="1170" stroke="#C23B3B" stroke-dasharray="26 18"/>
+    <line x1="966" y1="80" x2="966" y2="1170" stroke="#2F5D3A" stroke-dasharray="26 18"/>
+  </g>
+
+  <!-- azevinho nos cantos superiores -->
+  <g>
+    <g transform="translate(75,100) scale(1.5)">
+      <ellipse cx="0" cy="0" rx="22" ry="11" fill="#2F5D3A" transform="rotate(-25)"/>
+      <ellipse cx="18" cy="10" rx="22" ry="11" fill="#2F5D3A" transform="rotate(20 18 10)"/>
+      <circle cx="6" cy="14" r="7" fill="#C23B3B"/>
+      <circle cx="18" cy="18" r="7" fill="#C23B3B"/>
+    </g>
+    <g transform="translate(925,100) scale(-1.5,1.5)">
+      <ellipse cx="0" cy="0" rx="22" ry="11" fill="#2F5D3A" transform="rotate(-25)"/>
+      <ellipse cx="18" cy="10" rx="22" ry="11" fill="#2F5D3A" transform="rotate(20 18 10)"/>
+      <circle cx="6" cy="14" r="7" fill="#C23B3B"/>
+      <circle cx="18" cy="18" r="7" fill="#C23B3B"/>
+    </g>
+  </g>
+
+  <!-- flocos de neve simples espalhados na base -->
+  <g stroke="#F4EFE4" stroke-width="3" stroke-linecap="round">
+    <g transform="translate(110,1190)">
+      <line x1="-14" y1="0" x2="14" y2="0"/><line x1="0" y1="-14" x2="0" y2="14"/>
+      <line x1="-10" y1="-10" x2="10" y2="10"/><line x1="-10" y1="10" x2="10" y2="-10"/>
+    </g>
+    <g transform="translate(890,1190)">
+      <line x1="-14" y1="0" x2="14" y2="0"/><line x1="0" y1="-14" x2="0" y2="14"/>
+      <line x1="-10" y1="-10" x2="10" y2="10"/><line x1="-10" y1="10" x2="10" y2="-10"/>
+    </g>
+    <g transform="translate(500,1205) scale(0.8)">
+      <line x1="-14" y1="0" x2="14" y2="0"/><line x1="0" y1="-14" x2="0" y2="14"/>
+      <line x1="-10" y1="-10" x2="10" y2="10"/><line x1="-10" y1="10" x2="10" y2="-10"/>
+    </g>
+  </g>
+</svg>

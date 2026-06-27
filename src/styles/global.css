@@ -326,6 +326,147 @@ input[type='file'] {
     padding-bottom: 6px;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x proximity;
+    align-items: flex-start;
+  }
+  .filmstrip::-webkit-scrollbar {
+    height: 4px;
+  }
+  .filmstrip::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+  }
+}
+
+/* Item = cabeçalho de categoria (opcional) + botão da moldura */
+.frame-item {
+  width: 100%;
+}
+.frame-group-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--amber-dim);
+  padding: 14px 6px 4px;
+}
+.frame-item:first-child .frame-group-label {
+  padding-top: 0;
+}
+@media (max-width: 600px) {
+  .frame-item {
+    flex: 0 0 84px;
+    width: auto;
+  }
+  .frame-group-label {
+    display: none;
+  }
+}
+
+.frame-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 6px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: 1px solid transparent;
+  position: relative;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+.frame-option:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+.frame-option.active {
+  background: rgba(224, 138, 46, 0.12);
+  border-color: rgba(224, 138, 46, 0.4);
+}
+.frame-item:not(:last-child) .frame-option::after {
+  content: '';
+  position: absolute;
+  left: 60px;
+  right: 0;
+  bottom: 0;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.12);
+}
+@media (max-width: 600px) {
+  .frame-option {
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px 4px;
+    scroll-snap-align: start;
+  }
+  .frame-item:not(:last-child) .frame-option::after {
+    display: none;
+  }
+  .frame-option .desc {
+    display: none;
+  }
+  .frame-option .name {
+    font-size: 11.5px;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .sprocket-num {
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    width: auto;
+    font-size: 10px;
+  }
+}
+.sprocket-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.35);
+  width: 24px;
+  flex-shrink: 0;
+}
+.frame-option.active .sprocket-num {
+  color: var(--amber-dim);
+  font-weight: 600;
+}
+.swatch {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #d8d2c2;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+.swatch img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (max-width: 600px) {
+  .swatch {
+    width: 56px;
+    height: 56px;
+  }
+}
+.frame-option .name {
+  font-weight: 600;
+  font-size: 14.5px;
+}
+.frame-option .desc {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.5);
+  margin-top: 1px;
+}
+@media (max-width: 600px) {
+  .filmstrip {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
   }
   .filmstrip::-webkit-scrollbar {
     height: 4px;
@@ -454,6 +595,42 @@ input[type='file'] {
   font-family: var(--font-mono);
 }
 
+/* Print options */
+.print-options {
+  margin-top: 14px;
+}
+.print-options-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(244, 239, 228, 0.5);
+  margin-bottom: 8px;
+}
+.print-options-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.chip {
+  background: rgba(244, 239, 228, 0.08);
+  color: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 16px;
+  min-height: 40px;
+  font-size: 12.5px;
+}
+.chip:hover:not(:disabled) {
+  background: rgba(244, 239, 228, 0.14);
+}
+.chip.active {
+  background: rgba(224, 138, 46, 0.18);
+  border-color: var(--amber);
+  color: var(--amber);
+}
+
 /* Footer */
 .app-footer {
   text-align: center;
@@ -478,11 +655,10 @@ input[type='file'] {
   .print-only {
     display: block;
     visibility: visible;
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: fixed;
+    inset: 0;
     width: 100%;
-    max-height: 100vh;
+    height: 100%;
     object-fit: contain;
   }
 }

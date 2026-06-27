@@ -1,0 +1,33 @@
+<svg width="1000" height="1250" viewBox="0 0 1000 1250" xmlns="http://www.w3.org/2000/svg">
+  <rect x="48" y="55" width="904" height="1140" fill="none" stroke="#D9B45C" stroke-width="6"/>
+  <rect x="64" y="71" width="872" height="1108" fill="none" stroke="#D9B45C" stroke-width="1.5"/>
+
+  <g fill="#D9B45C">
+    <g transform="translate(90,95)">
+      <path d="M0 -30 L8 -8 L30 0 L8 8 L0 30 L-8 8 L-30 0 L-8 -8 Z"/>
+      <circle cx="46" cy="-30" r="5"/>
+      <circle cx="-40" cy="36" r="4"/>
+    </g>
+    <g transform="translate(910,95)">
+      <path d="M0 -30 L8 -8 L30 0 L8 8 L0 30 L-8 8 L-30 0 L-8 -8 Z"/>
+      <circle cx="-46" cy="-30" r="5"/>
+      <circle cx="40" cy="36" r="4"/>
+    </g>
+    <g transform="translate(90,1155)">
+      <path d="M0 -26 L7 -7 L26 0 L7 7 L0 26 L-7 7 L-26 0 L-7 -7 Z"/>
+      <circle cx="42" cy="26" r="4"/>
+    </g>
+    <g transform="translate(910,1155)">
+      <path d="M0 -26 L7 -7 L26 0 L7 7 L0 26 L-7 7 L-26 0 L-7 -7 Z"/>
+      <circle cx="-42" cy="26" r="4"/>
+    </g>
+  </g>
+
+  <g fill="#D9B45C" opacity="0.85">
+    <circle cx="300" cy="40" r="4"/>
+    <circle cx="360" cy="60" r="3"/>
+    <circle cx="500" cy="32" r="5"/>
+    <circle cx="640" cy="58" r="3"/>
+    <circle cx="700" cy="40" r="4"/>
+  </g>
+</svg>

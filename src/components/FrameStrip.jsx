@@ -1,4 +1,6 @@
 export default function FrameStrip({ frames, activeFrameId, onSelect, onUploadFrame, fileInputRef }) {
+  let lastCategory = null
+
   return (
     <div className="strip-panel">
       <div className="strip-title">
@@ -7,22 +9,28 @@ export default function FrameStrip({ frames, activeFrameId, onSelect, onUploadFr
       </div>
 
       <div className="filmstrip">
-        {frames.map((frame, i) => (
-          <button
-            key={frame.id}
-            className={`frame-option ${frame.id === activeFrameId ? 'active' : ''}`}
-            onClick={() => onSelect(frame.id)}
-          >
-            <span className="sprocket-num">{String(i + 1).padStart(2, '0')}</span>
-            <span className="swatch">
-              <img src={frame.src} alt="" />
-            </span>
-            <span>
-              <div className="name">{frame.name}</div>
-              <div className="desc">{frame.desc}</div>
-            </span>
-          </button>
-        ))}
+        {frames.map((frame, i) => {
+          const showHeader = frame.category && frame.category !== lastCategory
+          lastCategory = frame.category
+          return (
+            <div className="frame-item" key={frame.id}>
+              {showHeader && <div className="frame-group-label">{frame.category}</div>}
+              <button
+                className={`frame-option ${frame.id === activeFrameId ? 'active' : ''}`}
+                onClick={() => onSelect(frame.id)}
+              >
+                <span className="sprocket-num">{String(i + 1).padStart(2, '0')}</span>
+                <span className="swatch">
+                  <img src={frame.src} alt="" />
+                </span>
+                <span>
+                  <div className="name">{frame.name}</div>
+                  <div className="desc">{frame.desc}</div>
+                </span>
+              </button>
+            </div>
+          )
+        })}
       </div>
 
       <div className="upload-frame-row">

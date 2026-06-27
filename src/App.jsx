@@ -5,8 +5,9 @@ import Viewfinder from './components/Viewfinder.jsx'
 import Controls from './components/Controls.jsx'
 import CaptionInput from './components/CaptionInput.jsx'
 import FrameStrip from './components/FrameStrip.jsx'
+import PrintOptions from './components/PrintOptions.jsx'
 import { useCamera } from './hooks/useCamera.js'
-import { captureVideoFrame, loadImage, renderComposite } from './utils/canvas.js'
+import { captureVideoFrame, loadImage, renderComposite, renderPrintStrip } from './utils/canvas.js'
 import { frames as builtInFrames } from './data/frames.js'
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
   const [activeFrameId, setActiveFrameId] = useState(builtInFrames[0]?.id ?? null)
   const [caption, setCaption] = useState('')
   const [hasResult, setHasResult] = useState(false)
+  const [printLayout, setPrintLayout] = useState('single')
 
   const allFrames = [...builtInFrames, ...customFrames]
   const activeFrame = allFrames.find((f) => f.id === activeFrameId) || null
@@ -39,9 +41,6 @@ export default function App() {
       if (!photoImg || !canvasRef.current) return
       const frameImg = activeFrame ? await loadImage(activeFrame.src) : null
       renderComposite({ canvas: canvasRef.current, photoImg, frameImg, caption })
-      if (printImgRef.current) {
-        printImgRef.current.src = canvasRef.current.toDataURL('image/png')
-      }
       setHasResult(true)
     }
     run()
@@ -98,8 +97,17 @@ export default function App() {
   }
 
   function handlePrint() {
-    if (!hasResult) return
-    window.print()
+    if (!hasResult || !canvasRef.current || !printImgRef.current) return
+
+    const sourceCanvas = canvasRef.current
+    const targetCanvas =
+      printLayout === 'single'
+        ? sourceCanvas
+        : renderPrintStrip({ sourceCanvas, copies: printLayout === 'strip4' ? 4 : 3 })
+
+    const img = printImgRef.current
+    img.onload = () => window.print()
+    img.src = targetCanvas.toDataURL('image/png')
   }
 
   const frameIndex = allFrames.findIndex((f) => f.id === activeFrameId)
@@ -135,6 +143,8 @@ export default function App() {
           />
 
           <CaptionInput value={caption} onChange={setCaption} />
+
+          <PrintOptions value={printLayout} onChange={setPrintLayout} />
         </div>
 
         <FrameStrip
