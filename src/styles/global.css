@@ -19,6 +19,17 @@ body {
   overflow-x: hidden;
 }
 
+.app {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+@media (max-width: 600px) {
+  .app {
+    padding: 20px 14px calc(96px + env(safe-area-inset-bottom));
+  }
+}
+
 /* Header */
 .app-header {
   text-align: center;
