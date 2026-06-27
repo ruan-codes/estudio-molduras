@@ -73,11 +73,6 @@ export function captureVideoFrame(video, mirror = false) {
   return loadImage(tmp.toDataURL('image/png'))
 }
 
-// Monta uma tirinha estilo "cabine de fotos": a mesma foto repetida
-// `copies` vezes, empilhada verticalmente, com linha de corte pontilhada
-// entre cada cópia e uma etiqueta vertical de marca na margem — igual à
-// tira de papel que sai de uma cabine física. Recebe o canvas já composto
-// (foto + moldura + legenda) como fonte.
 export function renderPrintStrip({ sourceCanvas, copies = 3, brandLabel = 'ESTÚDIO DE MOLDURAS' }) {
   const unitW = sourceCanvas.width
   const unitH = sourceCanvas.height

@@ -6,6 +6,9 @@
   padding: 0;
 }
 
+html {
+  overflow-x: hidden;
+}
 body {
   background: var(--bg);
   background-image: radial-gradient(circle at 15% 10%, rgba(244, 239, 228, 0.04), transparent 40%),
@@ -13,17 +16,7 @@ body {
   color: var(--paper);
   font-family: var(--font-body);
   min-height: 100vh;
-}
-
-.app {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 32px 20px 80px;
-}
-@media (max-width: 600px) {
-  .app {
-    padding: 20px 14px calc(96px + env(safe-area-inset-bottom));
-  }
+  overflow-x: hidden;
 }
 
 /* Header */
@@ -74,6 +67,13 @@ body {
   grid-template-columns: 1.15fr 0.85fr;
   gap: 28px;
   align-items: start;
+}
+/* Sem isso, o item do grid que contém a tira de scroll horizontal
+   (.filmstrip) é dimensionado pelo conteúdo INTEIRO dela (todas as
+   molduras lado a lado), e não pelo espaço disponível na tela — fazendo a
+   página inteira "estourar" mais larga que a viewport no mobile. */
+.stage > * {
+  min-width: 0;
 }
 @media (max-width: 860px) {
   .stage {
@@ -431,6 +431,7 @@ input[type='file'] {
   color: var(--ink);
   border-radius: var(--radius-md);
   padding: 20px;
+  min-width: 0;
 }
 @media (max-width: 600px) {
   .strip-panel {
