@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import Viewfinder from './components/Viewfinder.jsx'
-import Controls from './components/Controls.jsx'
-import CaptionInput from './components/CaptionInput.jsx'
+import StepProgress from './components/StepProgress.jsx'
+import CameraActions from './components/CameraActions.jsx'
+import ResultPanel from './components/ResultPanel.jsx'
 import FrameStrip from './components/FrameStrip.jsx'
-import PrintOptions from './components/PrintOptions.jsx'
 import { useCamera } from './hooks/useCamera.js'
 import { captureVideoFrame, loadImage, renderComposite, renderPrintStrip } from './utils/canvas.js'
 import { frames as builtInFrames } from './data/frames.js'
@@ -31,6 +31,13 @@ export default function App() {
   const [caption, setCaption] = useState('')
   const [hasResult, setHasResult] = useState(false)
   const [printLayout, setPrintLayout] = useState('single')
+
+  // Etapa do fluxo mobile (1 Capturar · 2 Moldura · 3 Revelar). No desktop
+  // esse estado é ignorado visualmente — lá as duas áreas ficam sempre
+  // visíveis lado a lado (ver regras dentro de @media no global.css).
+  const [step, setStep] = useState(1)
+  const nextStep = () => setStep((s) => Math.min(3, s + 1))
+  const prevStep = () => setStep((s) => Math.max(1, s - 1))
 
   const allFrames = [...builtInFrames, ...customFrames]
   const activeFrame = allFrames.find((f) => f.id === activeFrameId) || null
@@ -63,6 +70,7 @@ export default function App() {
     const img = await captureVideoFrame(videoRef.current, facingMode === 'user')
     setPhotoImg(img)
     stopCamera()
+    setStep(2) // depois de capturar, segue automaticamente pra escolha de moldura
   }
 
   function handleUploadClick() {
@@ -74,6 +82,7 @@ export default function App() {
     reader.onload = async (ev) => {
       const img = await loadImage(ev.target.result)
       setPhotoImg(img)
+      setStep(2) // mesma lógica de avanço automático ao enviar uma foto
     }
     reader.readAsDataURL(file)
   }
@@ -114,46 +123,60 @@ export default function App() {
   const frameCounterLabel = `QUADRO ${String(frameIndex + 1).padStart(2, '0')}`
 
   return (
-    <div className="app">
+    <div className="app" data-active-step={step}>
       <Header />
+
+      <Viewfinder
+        videoRef={videoRef}
+        canvasRef={canvasRef}
+        cameraActive={cameraActive}
+        hasResult={hasResult}
+        frameCounterLabel={frameCounterLabel}
+        mirrorPreview={cameraActive && facingMode === 'user'}
+      />
+
+      {/* Barra de progresso do wizard — só aparece em telas mobile */}
+      <StepProgress step={step} onBack={prevStep} />
 
       <div className="stage">
         <div>
-          <Viewfinder
-            videoRef={videoRef}
-            canvasRef={canvasRef}
-            cameraActive={cameraActive}
-            hasResult={hasResult}
-            frameCounterLabel={frameCounterLabel}
-            mirrorPreview={cameraActive && facingMode === 'user'}
-          />
-
-          <Controls
+          <CameraActions
             cameraActive={cameraActive}
             onToggleCamera={handleToggleCamera}
             onSwitchCamera={switchCamera}
             onUploadClick={handleUploadClick}
             onFileSelected={handleFileSelected}
             onShoot={handleShoot}
-            onDownload={handleDownload}
-            onPrint={handlePrint}
             canShoot={cameraActive}
-            canDownload={hasResult}
             fileInputRef={photoFileInputRef}
           />
 
-          <CaptionInput value={caption} onChange={setCaption} />
-
-          <PrintOptions value={printLayout} onChange={setPrintLayout} />
+          <ResultPanel
+            caption={caption}
+            onCaptionChange={setCaption}
+            printLayout={printLayout}
+            onPrintLayoutChange={setPrintLayout}
+            onDownload={handleDownload}
+            onPrint={handlePrint}
+            canDownload={hasResult}
+          />
         </div>
 
-        <FrameStrip
-          frames={allFrames}
-          activeFrameId={activeFrameId}
-          onSelect={setActiveFrameId}
-          onUploadFrame={handleUploadFrame}
-          fileInputRef={frameFileInputRef}
-        />
+        <div data-step="2">
+          <FrameStrip
+            frames={allFrames}
+            activeFrameId={activeFrameId}
+            onSelect={setActiveFrameId}
+            onUploadFrame={handleUploadFrame}
+            fileInputRef={frameFileInputRef}
+          />
+          {/* botão de avançar — só existe visualmente no fluxo mobile */}
+          <div className="controls controls-primary wizard-advance">
+            <button className="btn-primary" style={{ flex: 1 }} onClick={nextStep}>
+              Avançar → Revelar
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Usada só durante a impressão — fica escondida na tela normal (ver .print-only no CSS) */}
