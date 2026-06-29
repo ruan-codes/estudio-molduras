@@ -92,7 +92,7 @@ export default function App() {
     const id = `custom-${Date.now()}`
     setCustomFrames((prev) => [
       ...prev,
-      { id, name: file.name.replace(/\.png$/i, ''), desc: 'Moldura enviada por você', src: url },
+      { id, name: file.name.replace(/\.(png|webp|svg)$/i, ''), desc: 'Moldura enviada por você', src: url },
     ])
     setActiveFrameId(id)
   }

@@ -35,19 +35,19 @@ export default function FrameStrip({ frames, activeFrameId, onSelect, onUploadFr
 
       <div className="upload-frame-row">
         <button className="btn-ghost" style={{ width: '100%' }} onClick={() => fileInputRef.current?.click()}>
-          + Adicionar minha moldura (PNG)
+          + Adicionar minha moldura
         </button>
         <input
           ref={fileInputRef}
           type="file"
-          accept="image/png"
+          accept="image/png,image/webp,image/svg+xml"
           onChange={(e) => {
             const file = e.target.files?.[0]
             if (file) onUploadFrame(file)
             e.target.value = ''
           }}
         />
-        <div className="upload-frame-hint">PNG com fundo transparente no centro funciona melhor.</div>
+        <div className="upload-frame-hint">PNG, WebP ou SVG com fundo transparente no centro funciona melhor.</div>
       </div>
     </div>
   )

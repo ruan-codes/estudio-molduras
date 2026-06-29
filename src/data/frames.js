@@ -1,13 +1,14 @@
 // MANIFESTO DE MOLDURAS
 // ----------------------------------------------------------------------------
 // Para adicionar uma moldura real enviada pelo cliente:
-// 1. Salve o arquivo PNG (fundo transparente, janela vazia onde a foto aparece)
-//    dentro de src/assets/frames/   ex: src/assets/frames/aniversario.png
+// 1. Salve o arquivo (PNG, WebP ou SVG, com fundo transparente e janela vazia
+//    onde a foto aparece) dentro de src/assets/frames/
+//    ex: src/assets/frames/aniversario.png
 // 2. Importe o arquivo no topo deste arquivo:
 //    import aniversarioImg from '../assets/frames/aniversario.png'
 // 3. Adicione uma entrada no array `frames` abaixo, apontando `src` para a
 //    variável importada. O `ratio` é opcional — se omitido, o app usa a
-//    proporção real do PNG automaticamente. O `category` é só cosmético,
+//    proporção real da imagem automaticamente. O `category` é só cosmético,
 //    usado para agrupar com um título na tira de seleção (ver FrameStrip.jsx).
 //
 // Não há limite de quantidade. A ordem do array é a ordem que aparece na
