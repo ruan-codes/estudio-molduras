@@ -16,9 +16,12 @@ export default function App() {
   const printImgRef = useRef(null)
   const photoFileInputRef = useRef(null)
   const frameFileInputRef = useRef(null)
+  // Tracks blob URLs so we can revoke them on unmount (#2 — memory leak fix)
+  const blobUrlsRef = useRef([])
 
   const {
     active: cameraActive,
+    error: cameraError,
     facingMode,
     start: startCamera,
     stop: stopCamera,
@@ -31,6 +34,8 @@ export default function App() {
   const [caption, setCaption] = useState('')
   const [hasResult, setHasResult] = useState(false)
   const [printLayout, setPrintLayout] = useState('single')
+  // Tracks when the canvas is being composited so we can show a spinner (#4)
+  const [rendering, setRendering] = useState(false)
 
   // Etapa do fluxo mobile (1 Capturar · 2 Moldura · 3 Revelar). No desktop
   // esse estado é ignorado visualmente — lá as duas áreas ficam sempre
@@ -46,12 +51,25 @@ export default function App() {
   useEffect(() => {
     async function run() {
       if (!photoImg || !canvasRef.current) return
-      const frameImg = activeFrame ? await loadImage(activeFrame.src) : null
-      renderComposite({ canvas: canvasRef.current, photoImg, frameImg, caption })
-      setHasResult(true)
+      setRendering(true)
+      try {
+        // src === null significa "Sem moldura" (#7)
+        const frameImg = activeFrame?.src ? await loadImage(activeFrame.src) : null
+        renderComposite({ canvas: canvasRef.current, photoImg, frameImg, caption })
+        setHasResult(true)
+      } finally {
+        setRendering(false)
+      }
     }
     run()
   }, [photoImg, activeFrame, caption])
+
+  // Revoga todos os blob URLs criados para molduras personalizadas (#2)
+  useEffect(() => {
+    return () => {
+      blobUrlsRef.current.forEach((url) => URL.revokeObjectURL(url))
+    }
+  }, [])
 
   async function handleToggleCamera() {
     if (cameraActive) {
@@ -62,7 +80,7 @@ export default function App() {
       await startCamera()
       setHasResult(false)
     } catch {
-      // erro já tratado dentro do hook
+      // erro já visível via cameraError do hook (#3)
     }
   }
 
@@ -89,6 +107,7 @@ export default function App() {
 
   function handleUploadFrame(file) {
     const url = URL.createObjectURL(file)
+    blobUrlsRef.current.push(url) // registra para revogação posterior (#2)
     const id = `custom-${Date.now()}`
     setCustomFrames((prev) => [
       ...prev,
@@ -133,6 +152,9 @@ export default function App() {
         hasResult={hasResult}
         frameCounterLabel={frameCounterLabel}
         mirrorPreview={cameraActive && facingMode === 'user'}
+        rendering={rendering}
+        cameraError={cameraError}
+        activeFrame={activeFrame}
       />
 
       {/* Barra de progresso do wizard — só aparece em telas mobile */}

@@ -1,73 +1,138 @@
 <svg width="1000" height="1250" viewBox="0 0 1000 1250" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <pattern id="checkers" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-      <rect width="60" height="60" fill="#F4EFE4"/>
-      <rect width="30" height="30" fill="#C23B3B"/>
-      <rect x="30" y="30" width="30" height="30" fill="#C23B3B"/>
-      <line x1="0" y1="15" x2="60" y2="15" stroke="#8C2E2E" stroke-width="1" opacity="0.5"/>
-      <line x1="0" y1="45" x2="60" y2="45" stroke="#8C2E2E" stroke-width="1" opacity="0.5"/>
-      <line x1="15" y1="0" x2="15" y2="60" stroke="#8C2E2E" stroke-width="1" opacity="0.5"/>
-      <line x1="45" y1="0" x2="45" y2="60" stroke="#8C2E2E" stroke-width="1" opacity="0.5"/>
+    <!-- Patterns for Flags -->
+    <pattern id="checkers" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect width="40" height="40" fill="#F4EFE4"/>
+      <rect width="20" height="20" fill="#C23B3B"/>
+      <rect x="20" y="20" width="20" height="20" fill="#C23B3B"/>
     </pattern>
+    <pattern id="straw" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="#D9A93B" />
+      <line x1="0" y1="10" x2="20" y2="10" stroke="#B08D3E" stroke-width="2" />
+      <line x1="10" y1="0" x2="10" y2="20" stroke="#B08D3E" stroke-width="2" />
+    </pattern>
+
+    <!-- Gradients for Bonfire and Balloon -->
+    <linearGradient id="fire-grad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#C23B3B" />
+      <stop offset="40%" stop-color="#E08A2E" />
+      <stop offset="85%" stop-color="#D9A93B" />
+      <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+    </linearGradient>
+
+    <linearGradient id="wood-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#5C4326" />
+      <stop offset="50%" stop-color="#7C5D38" />
+      <stop offset="100%" stop-color="#402D18" />
+    </linearGradient>
+
+    <linearGradient id="balloon-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D9A93B" />
+      <stop offset="50%" stop-color="#C23B3B" />
+      <stop offset="100%" stop-color="#3B6FA0" />
+    </linearGradient>
+
+    <!-- Shadow filter for 3D depth -->
+    <filter id="junina-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="5" stdDeviation="4" flood-color="#000" flood-opacity="0.35" />
+    </filter>
+
+    <!-- Flag Templates -->
     <g id="flag">
       <polygon points="0,0 50,0 25,60" />
       <polygon points="5,5 45,5 25,50" fill="#FFF" opacity="0.3"/>
-      <circle cx="25" cy="5" r="3" fill="#5C4326"/>
     </g>
     <g id="flag-square">
       <polygon points="0,0 50,0 50,45 25,60 0,45" />
       <polygon points="5,5 45,5 45,40 25,50 5,40" fill="#FFF" opacity="0.3"/>
-      <circle cx="25" cy="5" r="3" fill="#5C4326"/>
+    </g>
+
+    <!-- Bonfire Template -->
+    <g id="bonfire">
+      <!-- Wood Logs -->
+      <rect x="-40" y="10" width="80" height="20" rx="5" fill="url(#wood-grad)" stroke="#2D1F10" stroke-width="2" transform="rotate(-15)"/>
+      <rect x="-40" y="10" width="80" height="20" rx="5" fill="url(#wood-grad)" stroke="#2D1F10" stroke-width="2" transform="rotate(15)"/>
+      <rect x="-50" y="22" width="100" height="20" rx="5" fill="url(#wood-grad)" stroke="#2D1F10" stroke-width="2"/>
+      <!-- Glowing Fire -->
+      <path d="M-30 10 C-30 -20, -10 -40, 0 -60 C 10 -40, 30 -20, 30 10 C 30 25, -30 25, -30 10 Z" fill="url(#fire-grad)"/>
+      <path d="M-15 10 C-15 -10, -5 -25, 0 -40 C 5 -25, 15 -10, 15 10 Z" fill="#FFF" opacity="0.6"/>
+      <!-- Sparkles -->
+      <circle cx="-25" cy="-20" r="3.5" fill="#D9A93B"/>
+      <circle cx="25" cy="-30" r="2.5" fill="#E08A2E"/>
+      <circle cx="5" cy="-70" r="3" fill="#FFF"/>
     </g>
   </defs>
 
+  <!-- Borders -->
   <rect x="15" y="15" width="970" height="1220" fill="none" stroke="#8C2E2E" stroke-width="4" stroke-dasharray="20 10"/>
   <rect x="25" y="25" width="950" height="1200" fill="none" stroke="#D9A93B" stroke-width="10"/>
 
-  <!-- Left and Right stitched borders -->
+  <!-- Left and Right stitched border margins -->
   <rect x="25" y="80" width="30" height="1060" fill="#C23B3B"/>
   <line x1="40" y1="80" x2="40" y2="1140" stroke="#FFF" stroke-width="3" stroke-dasharray="10 10"/>
   
   <rect x="945" y="80" width="30" height="1060" fill="#3B6FA0"/>
   <line x1="960" y1="80" x2="960" y2="1140" stroke="#FFF" stroke-width="3" stroke-dasharray="10 10"/>
 
-  <rect x="25" y="25" width="950" height="75" fill="#4C8C4A" opacity="0.2"/>
+  <!-- Top Festive Header Ribbon background -->
+  <rect x="25" y="25" width="950" height="75" fill="#4C8C4A" opacity="0.3"/>
 
-  <!-- Multiple string flags -->
-  <path d="M 10 30 Q 250 80, 500 30 T 990 30" stroke="#5C4326" stroke-width="4" fill="none"/>
-  <path d="M 10 15 Q 250 10, 500 60 T 990 15" stroke="#5C4326" stroke-width="3" fill="none" opacity="0.8"/>
-  
-  <g>
-    <!-- String 1 -->
-    <use href="#flag" x="50" y="40" fill="#C23B3B" transform="rotate(-5 75 40)"/>
-    <use href="#flag-square" x="120" y="47" fill="#D9A93B" transform="rotate(-2 145 47)"/>
-    <use href="#flag" x="190" y="52" fill="#3B6FA0" />
-    <use href="#flag-square" x="260" y="55" fill="#4C8C4A" />
-    <use href="#flag" x="330" y="55" fill="#D9A93B" />
-    <use href="#flag-square" x="400" y="52" fill="#C23B3B" />
-    <use href="#flag" x="470" y="45" fill="#3B6FA0" transform="rotate(3 495 45)"/>
+  <!-- Double hanging string flags with shadows -->
+  <g filter="url(#junina-shadow)">
+    <path d="M 10 30 Q 250 80, 500 30 T 990 30" stroke="#5C4326" stroke-width="4" fill="none"/>
+    <path d="M 10 15 Q 250 10, 500 60 T 990 15" stroke="#5C4326" stroke-width="3" fill="none" opacity="0.8"/>
     
-    <use href="#flag-square" x="540" y="40" fill="#4C8C4A" transform="rotate(-3 565 40)"/>
-    <use href="#flag" x="610" y="45" fill="#D9A93B" />
-    <use href="#flag-square" x="680" y="50" fill="#C23B3B" />
-    <use href="#flag" x="750" y="53" fill="#3B6FA0" />
-    <use href="#flag-square" x="820" y="50" fill="#4C8C4A" />
-    <use href="#flag" x="890" y="43" fill="#D9A93B" transform="rotate(5 915 43)"/>
+    <!-- String 1 Flags -->
+    <g>
+      <use href="#flag" x="50" y="40" fill="#C23B3B" transform="rotate(-5 75 40)"/>
+      <use href="#flag-square" x="120" y="47" fill="#D9A93B" transform="rotate(-2 145 47)"/>
+      <use href="#flag" x="190" y="52" fill="#3B6FA0" />
+      <use href="#flag-square" x="260" y="55" fill="#4C8C4A" />
+      <use href="#flag" x="330" y="55" fill="#D9A93B" />
+      <use href="#flag-square" x="400" y="52" fill="#C23B3B" />
+      <use href="#flag" x="470" y="45" fill="#3B6FA0" transform="rotate(3 495 45)"/>
+      
+      <use href="#flag-square" x="540" y="40" fill="#4C8C4A" transform="rotate(-3 565 40)"/>
+      <use href="#flag" x="610" y="45" fill="#D9A93B" />
+      <use href="#flag-square" x="680" y="50" fill="#C23B3B" />
+      <use href="#flag" x="750" y="53" fill="#3B6FA0" />
+      <use href="#flag-square" x="820" y="50" fill="#4C8C4A" />
+      <use href="#flag" x="890" y="43" fill="#D9A93B" transform="rotate(5 915 43)"/>
+    </g>
 
-    <!-- String 2 -->
-    <use href="#flag-square" x="80" y="15" fill="#4C8C4A" transform="rotate(8 105 15)"/>
-    <use href="#flag" x="230" y="15" fill="#C23B3B" />
-    <use href="#flag-square" x="380" y="27" fill="#3B6FA0" />
-    <use href="#flag" x="550" y="32" fill="#D9A93B" />
-    <use href="#flag-square" x="720" y="25" fill="#C23B3B" />
-    <use href="#flag" x="870" y="15" fill="#3B6FA0" transform="rotate(-8 895 15)"/>
+    <!-- String 2 Flags -->
+    <g>
+      <use href="#flag-square" x="80" y="15" fill="#4C8C4A" transform="rotate(8 105 15)"/>
+      <use href="#flag" x="230" y="15" fill="#C23B3B" />
+      <use href="#flag-square" x="380" y="27" fill="#3B6FA0" />
+      <use href="#flag" x="550" y="32" fill="#D9A93B" />
+      <use href="#flag-square" x="720" y="25" fill="#C23B3B" />
+      <use href="#flag" x="870" y="15" fill="#3B6FA0" transform="rotate(-8 895 15)"/>
+    </g>
   </g>
 
-  <!-- Ornate Tablecloth bottom -->
-  <rect x="25" y="1130" width="950" height="95" fill="url(#checkers)"/>
+  <!-- Ornate Straw Tablecloth bottom -->
+  <rect x="25" y="1130" width="950" height="95" fill="url(#checkers)" filter="url(#junina-shadow)"/>
   <!-- Fringes -->
   <path d="M 25 1130 L 975 1130" stroke="#FFF" stroke-width="6" stroke-dasharray="15 15"/>
   <path d="M 25 1135 L 975 1135" stroke="#C23B3B" stroke-width="2" stroke-dasharray="15 15"/>
-  <!-- More frills -->
+  <!-- Decorative lace trim at bottom -->
   <path d="M 25 1215 Q 40 1230, 55 1215 T 85 1215 T 115 1215 T 145 1215 T 175 1215 T 205 1215 T 235 1215 T 265 1215 T 295 1215 T 325 1215 T 355 1215 T 385 1215 T 415 1215 T 445 1215 T 475 1215 T 505 1215 T 535 1215 T 565 1215 T 595 1215 T 625 1215 T 655 1215 T 685 1215 T 715 1215 T 745 1215 T 775 1215 T 805 1215 T 835 1215 T 865 1215 T 895 1215 T 925 1215 T 955 1215 T 985 1215" stroke="#8C2E2E" stroke-width="4" fill="none"/>
+
+  <!-- Hanging Decorated Paper Balloon in top center -->
+  <g transform="translate(500, 60)" filter="url(#junina-shadow)">
+    <line x1="0" y1="-35" x2="0" y2="0" stroke="#5C4326" stroke-width="2"/>
+    <!-- Balloon Body -->
+    <polygon points="0,-25 16,-10 16,10 0,25 -16,10 -16,-10" fill="url(#balloon-grad)" stroke="#FFF" stroke-width="1.5"/>
+    <line x1="-16" y1="-10" x2="16" y2="10" stroke="#FFF" stroke-width="1" opacity="0.5"/>
+    <line x1="-16" y1="10" x2="16" y2="-10" stroke="#FFF" stroke-width="1" opacity="0.5"/>
+    <!-- Tassels/Ribbons hanging from balloon -->
+    <path d="M-8 23 C-12 35, -5 45, -8 55" stroke="#C23B3B" stroke-width="2" fill="none" />
+    <path d="M0 25 C0 38, 5 48, 0 60" stroke="#D9A93B" stroke-width="2" fill="none" />
+    <path d="M8 23 C12 35, 5 45, 8 55" stroke="#3B6FA0" stroke-width="2" fill="none" />
+  </g>
+
+  <!-- Ornate Bonfires with glowing flames in bottom corners -->
+  <use href="#bonfire" x="120" y="1120" filter="url(#junina-shadow)"/>
+  <use href="#bonfire" x="880" y="1120" filter="url(#junina-shadow)"/>
 </svg>

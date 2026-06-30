@@ -1,12 +1,108 @@
 <svg width="1000" height="1250" viewBox="0 0 1000 1250" xmlns="http://www.w3.org/2000/svg">
-  <!-- Delicate ornate border -->
+  <defs>
+    <!-- Gold gradient for Fabergé egg details -->
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C8A24A" />
+      <stop offset="50%" stop-color="#FDF1A9" />
+      <stop offset="100%" stop-color="#9A7B33" />
+    </linearGradient>
+
+    <!-- Pastel egg gradients -->
+    <linearGradient id="egg-pink" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0F5" />
+      <stop offset="60%" stop-color="#E8B7C7" />
+      <stop offset="100%" stop-color="#C78FA2" />
+    </linearGradient>
+
+    <linearGradient id="egg-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EBF4F6" />
+      <stop offset="60%" stop-color="#B7D3E8" />
+      <stop offset="100%" stop-color="#8FB5D1" />
+    </linearGradient>
+
+    <linearGradient id="egg-green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0FFF0" />
+      <stop offset="60%" stop-color="#B7D9C9" />
+      <stop offset="100%" stop-color="#8FC4AB" />
+    </linearGradient>
+
+    <linearGradient id="egg-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDF0" />
+      <stop offset="60%" stop-color="#F6D9A0" />
+      <stop offset="100%" stop-color="#D9AC59" />
+    </linearGradient>
+
+    <!-- Shadow filter for eggs and bunny -->
+    <filter id="pascoa-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="5" stdDeviation="4" flood-color="#000" flood-opacity="0.25" />
+    </filter>
+
+    <!-- Detailed Fabergé Egg Template (centered at 0,0) -->
+    <g id="faberge-egg-pink">
+      <ellipse cx="0" cy="0" rx="35" ry="48" fill="url(#egg-pink)" filter="url(#pascoa-shadow)" />
+      <!-- Gold diagonal trellis pattern -->
+      <path d="M-22 -35 L22 35 M-30 -15 L15 38 M-33 10 L0 46 M-10 -45 L32 20 M15 -38 L34 -5" stroke="url(#gold-grad)" stroke-width="1.5" fill="none" opacity="0.8"/>
+      <path d="M22 -35 L-22 35 M30 -15 L-15 38 M33 10 L0 46 M10 -45 L-32 20 M-15 -38 L-34 -5" stroke="url(#gold-grad)" stroke-width="1.5" fill="none" opacity="0.8"/>
+      <!-- Gold crown horizontal band -->
+      <path d="M-34 0 C -15 -10, 15 -10, 34 0" stroke="url(#gold-grad)" stroke-width="3.5" fill="none"/>
+      <!-- Tiny pearls -->
+      <circle cx="-25" cy="-2" r="2.5" fill="#FFF"/>
+      <circle cx="-13" cy="-5" r="2.5" fill="#FFF"/>
+      <circle cx="0" cy="-6" r="3.5" fill="#FFF"/>
+      <circle cx="13" cy="-5" r="2.5" fill="#FFF"/>
+      <circle cx="25" cy="-2" r="2.5" fill="#FFF"/>
+    </g>
+
+    <g id="faberge-egg-blue">
+      <ellipse cx="0" cy="0" rx="30" ry="42" fill="url(#egg-blue)" filter="url(#pascoa-shadow)" />
+      <!-- Gold horizontal lines with central flower -->
+      <path d="M-28 -12 L28 -12 M-28 12 L28 12" stroke="url(#gold-grad)" stroke-width="2" fill="none"/>
+      <!-- Waves -->
+      <path d="M-29 0 Q-15 -6, 0 0 T29 0" stroke="url(#gold-grad)" stroke-width="1.5" fill="none"/>
+      <!-- Gold centers -->
+      <circle cx="0" cy="0" r="5" fill="url(#gold-grad)" />
+      <circle cx="-18" cy="-12" r="3" fill="#D9A93B" />
+      <circle cx="18" cy="-12" r="3" fill="#D9A93B" />
+      <circle cx="-18" cy="12" r="3" fill="#D9A93B" />
+      <circle cx="18" cy="12" r="3" fill="#D9A93B" />
+    </g>
+
+    <g id="faberge-egg-green">
+      <ellipse cx="0" cy="0" rx="36" ry="50" fill="url(#egg-green)" filter="url(#pascoa-shadow)" />
+      <!-- Vertical stripes and dots -->
+      <path d="M-34 10 C-20 40, 20 40, 34 10" stroke="url(#gold-grad)" stroke-width="2" fill="none"/>
+      <path d="M-32 -10 C-18 -40, 18 -40, 32 -10" stroke="url(#gold-grad)" stroke-width="2" fill="none"/>
+      <path d="M-35 0 L35 0" stroke="url(#gold-grad)" stroke-width="3" fill="none"/>
+      <circle cx="0" cy="20" r="4.5" fill="#FFF"/>
+      <circle cx="-18" cy="18" r="4.5" fill="#FFF"/>
+      <circle cx="18" cy="18" r="4.5" fill="#FFF"/>
+      <circle cx="0" cy="-20" r="4.5" fill="#FFF"/>
+      <circle cx="-18" cy="-18" r="4.5" fill="#FFF"/>
+      <circle cx="18" cy="-18" r="4.5" fill="#FFF"/>
+    </g>
+  </defs>
+
+  <!-- Delicate ornate background border -->
   <rect x="30" y="30" width="940" height="1190" fill="none" stroke="#E8B7C7" stroke-width="12" rx="15"/>
   <rect x="45" y="45" width="910" height="1160" fill="none" stroke="#B7D9C9" stroke-width="4" rx="10"/>
-  <rect x="55" y="55" width="890" height="1140" fill="none" stroke="#F6D9A0" stroke-width="2" rx="5"/>
+  <rect x="55" y="55" width="890" height="1140" fill="none" stroke="url(#gold-grad)" stroke-width="2" rx="5"/>
 
-  <!-- Vines wrapping around the frame -->
-  <path d="M 40 100 Q 80 150, 40 200 T 40 300 T 40 400 T 40 500 T 40 600 T 40 700 T 40 800 T 40 900 T 40 1000 T 40 1100" fill="none" stroke="#B7D9C9" stroke-width="4"/>
-  <path d="M 960 100 Q 920 150, 960 200 T 960 300 T 960 400 T 960 500 T 960 600 T 960 700 T 960 800 T 960 900 T 960 1000 T 960 1100" fill="none" stroke="#B7D9C9" stroke-width="4"/>
+  <!-- Vines wrapping around the frame with detailed green leaves -->
+  <path d="M 40 100 Q 80 150, 40 200 T 40 300 T 40 400 T 40 500 T 40 600 T 40 700 T 40 800 T 40 900 T 40 1000 T 40 1100" fill="none" stroke="#B7D9C9" stroke-width="5"/>
+  <path d="M 960 100 Q 920 150, 960 200 T 960 300 T 960 400 T 960 500 T 960 600 T 960 700 T 960 800 T 960 900 T 960 1000 T 960 1100" fill="none" stroke="#B7D9C9" stroke-width="5"/>
+
+  <!-- Vine Leaves and Buds -->
+  <g fill="#8FC4AB">
+    <path d="M 65 130 C 75 125, 75 135, 65 140 Z" /> <path d="M 35 230 C 25 225, 25 235, 35 240 Z" />
+    <path d="M 65 330 C 75 325, 75 335, 65 340 Z" /> <path d="M 35 430 C 25 425, 25 435, 35 440 Z" />
+    <path d="M 65 530 C 75 525, 75 535, 65 540 Z" /> <path d="M 35 630 C 25 625, 25 635, 35 640 Z" />
+    <path d="M 65 730 C 75 725, 75 735, 65 740 Z" /> <path d="M 35 830 C 25 825, 25 835, 35 840 Z" />
+    
+    <path d="M 935 130 C 925 125, 925 135, 935 140 Z" /> <path d="M 965 230 C 975 225, 975 235, 965 240 Z" />
+    <path d="M 935 330 C 925 325, 925 335, 935 340 Z" /> <path d="M 965 430 C 975 425, 975 435, 965 440 Z" />
+    <path d="M 935 530 C 925 525, 925 535, 935 540 Z" /> <path d="M 965 630 C 975 625, 975 635, 965 640 Z" />
+    <path d="M 935 730 C 925 725, 925 735, 935 740 Z" /> <path d="M 965 830 C 975 825, 975 835, 965 840 Z" />
+  </g>
   
   <g fill="#E8B7C7">
     <!-- Little flowers on vines -->
@@ -20,56 +116,58 @@
   </g>
 
   <!-- Ornate Easter Eggs -->
-  <g>
-    <!-- Top Left Cluster -->
-    <g transform="translate(100,100) rotate(-15)">
-      <ellipse cx="0" cy="0" rx="35" ry="48" fill="#F6D9A0"/>
-      <path d="M-30 -10 Q 0 -25, 30 -10" stroke="#E8B7C7" stroke-width="8" fill="none"/>
-      <path d="M-30 10 Q 0 -5, 30 10" stroke="#B7D9C9" stroke-width="8" fill="none" stroke-dasharray="6 6"/>
-      <circle cx="0" cy="25" r="5" fill="#E8B7C7"/>
-      <circle cx="-15" cy="20" r="4" fill="#B7D9C9"/>
-      <circle cx="15" cy="20" r="4" fill="#B7D9C9"/>
-    </g>
-    
-    <!-- Top Right Cluster -->
-    <g transform="translate(900,100) rotate(20)">
-      <ellipse cx="0" cy="0" rx="30" ry="42" fill="#BFD7EE"/>
-      <path d="M-25 0 Q 0 -15, 25 0 M -25 10 Q 0 -5, 25 10" stroke="#E8B7C7" stroke-width="4" fill="none"/>
-      <circle cx="0" cy="-20" r="6" fill="#F6D9A0"/>
-      <circle cx="0" cy="25" r="6" fill="#F6D9A0"/>
-    </g>
+  <!-- Top Left Cluster -->
+  <use href="#faberge-egg-pink" x="120" y="120" transform="rotate(-15 120 120)"/>
+  <!-- Top Right Cluster -->
+  <use href="#faberge-egg-blue" x="880" y="120" transform="rotate(20 880 120)"/>
+  <!-- Bottom Left Cluster -->
+  <use href="#faberge-egg-green" x="120" y="1130" transform="rotate(10 120 1130)"/>
+  <!-- Bottom Right Cluster -->
+  <g transform="translate(880,1130) rotate(-15)">
+    <ellipse cx="0" cy="0" rx="38" ry="52" fill="url(#egg-gold)" filter="url(#pascoa-shadow)" />
+    <!-- Gold bands and stars -->
+    <path d="M-32 -15 L32 -15 M-35 5 L35 5 M-32 25 L32 25" stroke="url(#gold-grad)" stroke-width="3.5" fill="none"/>
+    <circle cx="0" cy="-5" r="5" fill="#E8B7C7"/>
+    <circle cx="-15" cy="-5" r="4" fill="#B7D3E8"/>
+    <circle cx="15" cy="-5" r="4" fill="#B7D3E8"/>
+  </g>
 
-    <!-- Bottom Left Cluster -->
-    <g transform="translate(120,1130) rotate(10)">
-      <ellipse cx="0" cy="0" rx="32" ry="45" fill="#E8B7C7"/>
-      <path d="M-28 -5 Q 0 5, 28 -5 M -28 15 Q 0 25, 28 15" stroke="#FBF3DD" stroke-width="6" fill="none"/>
-      <path d="M-25 -20 Q 0 -10, 25 -20" stroke="#B7D9C9" stroke-width="6" fill="none" stroke-dasharray="5 5"/>
-    </g>
-    
-    <!-- Bottom Right Cluster -->
-    <g transform="translate(880,1140) rotate(-15)">
-      <ellipse cx="0" cy="0" rx="38" ry="52" fill="#B7D9C9"/>
-      <path d="M-32 -15 L32 -15 M-35 5 L35 5 M-32 25 L32 25" stroke="#FBF3DD" stroke-width="6" fill="none"/>
-      <circle cx="0" cy="-5" r="5" fill="#F6D9A0"/>
-      <circle cx="-15" cy="-5" r="5" fill="#F6D9A0"/>
-      <circle cx="15" cy="-5" r="5" fill="#F6D9A0"/>
-      <circle cx="0" cy="15" r="5" fill="#E8B7C7"/>
-      <circle cx="-15" cy="15" r="5" fill="#E8B7C7"/>
-      <circle cx="15" cy="15" r="5" fill="#E8B7C7"/>
-    </g>
+  <!-- Cute Easter Bunny peeking from the bottom center-right -->
+  <g transform="translate(500, 1190)" filter="url(#pascoa-shadow)">
+    <!-- Ears -->
+    <ellipse cx="-20" cy="-50" rx="10" ry="30" fill="#FFF" stroke="#E8B7C7" stroke-width="2" transform="rotate(-10 -20 -50)"/>
+    <ellipse cx="-20" cy="-50" rx="5" ry="20" fill="#E8B7C7" transform="rotate(-10 -20 -50)"/>
+    <ellipse cx="20" cy="-50" rx="10" ry="30" fill="#FFF" stroke="#E8B7C7" stroke-width="2" transform="rotate(10 20 -50)"/>
+    <ellipse cx="20" cy="-50" rx="5" ry="20" fill="#E8B7C7" transform="rotate(10 20 -50)"/>
+    <!-- Head -->
+    <circle cx="0" cy="-15" r="28" fill="#FFF" stroke="#B7D9C9" stroke-width="1.5"/>
+    <!-- Cheeks and Nose -->
+    <ellipse cx="-8" cy="-8" rx="8" ry="6" fill="#FAD1D1" opacity="0.6"/>
+    <ellipse cx="8" cy="-8" rx="8" ry="6" fill="#FAD1D1" opacity="0.6"/>
+    <polygon points="-5,-12 5,-12 0,-8" fill="#E8B7C7" />
+    <!-- Eyes -->
+    <circle cx="-12" cy="-18" r="3.5" fill="#2E2822"/>
+    <circle cx="12" cy="-18" r="3.5" fill="#2E2822"/>
+    <circle cx="-13.5" cy="-19.5" r="1" fill="#FFF"/>
+    <circle cx="10.5" cy="-19.5" r="1" fill="#FFF"/>
   </g>
 
   <!-- Intricate Grass & Flowers at bottom -->
   <g stroke="#B7D9C9" stroke-width="6" stroke-linecap="round">
-    <path d="M 350 1200 Q 360 1150 370 1200 Q 380 1160 390 1200 Q 400 1140 410 1200 Q 420 1170 430 1200 Q 440 1150 450 1200" fill="none"/>
-    <path d="M 550 1200 Q 560 1150 570 1200 Q 580 1160 590 1200 Q 600 1140 610 1200 Q 620 1170 630 1200 Q 640 1150 650 1200" fill="none"/>
+    <path d="M 280 1200 Q 295 1130 310 1200 Q 320 1150 330 1200 Q 345 1120 360 1200" fill="none"/>
+    <path d="M 640 1200 Q 655 1130 670 1200 Q 680 1150 690 1200 Q 705 1120 720 1200" fill="none"/>
   </g>
-  <g fill="#F6D9A0">
-    <circle cx="380" cy="1150" r="8"/> <circle cx="370" cy="1145" r="5"/> <circle cx="390" cy="1145" r="5"/> <circle cx="380" cy="1135" r="5"/>
-    <circle cx="600" cy="1130" r="8"/> <circle cx="590" cy="1125" r="5"/> <circle cx="610" cy="1125" r="5"/> <circle cx="600" cy="1115" r="5"/>
+  <!-- Beautiful daisies -->
+  <g fill="#FFF">
+    <!-- Center yellow, petals white -->
+    <circle cx="320" cy="1150" r="12" /> <circle cx="320" cy="1150" r="4.5" fill="#F6D9A0"/>
+    <circle cx="680" cy="1140" r="12" /> <circle cx="680" cy="1140" r="4.5" fill="#F6D9A0"/>
   </g>
+  <!-- Pastel tulips -->
   <g fill="#E8B7C7">
-    <circle cx="430" cy="1160" r="7"/> <circle cx="422" cy="1156" r="4"/> <circle cx="438" cy="1156" r="4"/> <circle cx="430" cy="1148" r="4"/>
-    <circle cx="570" cy="1155" r="7"/> <circle cx="562" cy="1151" r="4"/> <circle cx="578" cy="1151" r="4"/> <circle cx="570" cy="1143" r="4"/>
+    <path d="M 355 1120 C 345 1105, 365 1105, 355 1120 Z" stroke="#E8B7C7" stroke-width="2"/>
+    <circle cx="355" cy="1120" r="6"/>
+    <path d="M 645 1125 C 635 1110, 655 1110, 645 1125 Z" stroke="#E8B7C7" stroke-width="2"/>
+    <circle cx="645" cy="1125" r="6"/>
   </g>
 </svg>

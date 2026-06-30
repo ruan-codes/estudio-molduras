@@ -1,52 +1,119 @@
 <svg width="1000" height="1250" viewBox="0 0 1000 1250" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <pattern id="stripes" width="15" height="15" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="0" x2="0" y2="15" stroke="#FFF" stroke-width="6" opacity="0.4"/>
+    <!-- Patterns for Washi Tape -->
+    <pattern id="stripes" width="20" height="20" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="none"/>
+      <line x1="0" y1="0" x2="0" y2="20" stroke="#FFF" stroke-width="8" opacity="0.45"/>
     </pattern>
-    <pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse">
-      <circle cx="6" cy="6" r="4" fill="#FFF" opacity="0.4"/>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="4.5" fill="#FFF" opacity="0.5"/>
     </pattern>
-    <pattern id="grid" width="12" height="12" patternUnits="userSpaceOnUse">
-      <path d="M 12 0 L 0 0 0 12" fill="none" stroke="#FFF" stroke-width="2" opacity="0.5"/>
+    <pattern id="grid" width="16" height="16" patternUnits="userSpaceOnUse">
+      <path d="M 16 0 L 0 0 0 16" fill="none" stroke="#FFF" stroke-width="2.5" opacity="0.4"/>
     </pattern>
+    <pattern id="stars" width="30" height="30" patternUnits="userSpaceOnUse">
+      <polygon points="15,4 18,11 25,11 20,16 22,23 15,19 8,23 10,16 5,11 12,11" fill="#FFF" opacity="0.45"/>
+    </pattern>
+
+    <!-- Shadow filter for the tape overlaying the photo -->
+    <filter id="tape-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="5" stdDeviation="4" flood-color="#000" flood-opacity="0.35" />
+    </filter>
+
+    <!-- Torn edge Washi Tape template (centered at 0,0, length ~180, width ~40) -->
+    <!-- We build the path with a zig-zag on left and right ends to simulate torn paper -->
+    <g id="torn-tape-h">
+      <!-- Path starts at top-left, goes to top-right, zigzags down, goes to bottom-left, zigzags up -->
+      <path d="M -90 -20 
+               L 90 -20 
+               L 95 -15 L 90 -10 L 97 -5 L 92 0 L 96 5 L 91 10 L 95 15 L 90 20 
+               L -90 20 
+               L -94 15 L -90 10 L -96 5 L -91 0 L -95 -5 L -90 -10 L -94 -15 Z" />
+    </g>
+
+    <!-- Torn edge Washi Tape template (vertical version, length ~180, width ~40) -->
+    <g id="torn-tape-v">
+      <path d="M -20 -90 
+               L 20 -90
+               L 15 -94 L 10 -90 L 5 -96 L 0 -91 L -5 -95 L -10 -90 L -15 -94 L -20 -90
+               L -20 90
+               L -15 95 L -10 91 L -5 96 L 0 91 L 5 95 L 10 91 L 15 95 L 20 90 Z" />
+    </g>
   </defs>
 
-  <g opacity="0.9">
-    <!-- Top Left -->
-    <rect x="-10" y="10" width="160" height="40" fill="#E08A2E" transform="rotate(-20 60 30)"/>
-    <rect x="-10" y="10" width="160" height="40" fill="url(#stripes)" transform="rotate(-20 60 30)"/>
-    <rect x="10" y="40" width="120" height="35" fill="#4FA8A0" transform="rotate(-40 70 57)"/>
-    <rect x="10" y="40" width="120" height="35" fill="url(#dots)" transform="rotate(-40 70 57)"/>
-    
-    <!-- Top Right -->
-    <rect x="840" y="15" width="150" height="45" fill="#4FA8A0" transform="rotate(30 915 37)"/>
-    <rect x="840" y="15" width="150" height="45" fill="url(#grid)" transform="rotate(30 915 37)"/>
-    <rect x="870" y="55" width="130" height="30" fill="#D9534F" transform="rotate(15 935 70)"/>
-    <rect x="870" y="55" width="130" height="30" fill="url(#stripes)" transform="rotate(15 935 70)"/>
-    
-    <!-- Bottom Left -->
-    <rect x="-20" y="1170" width="170" height="45" fill="#D9534F" transform="rotate(25 65 1192)"/>
-    <rect x="-20" y="1170" width="170" height="45" fill="url(#dots)" transform="rotate(25 65 1192)"/>
-    <rect x="10" y="1140" width="110" height="35" fill="#C8A24A" transform="rotate(45 65 1157)"/>
-    <rect x="10" y="1140" width="110" height="35" fill="url(#stripes)" transform="rotate(45 65 1157)"/>
-    
-    <!-- Bottom Right -->
-    <rect x="850" y="1180" width="160" height="40" fill="#C8A24A" transform="rotate(-22 930 1200)"/>
-    <rect x="850" y="1180" width="160" height="40" fill="url(#stripes)" transform="rotate(-22 930 1200)"/>
-    <rect x="880" y="1140" width="100" height="30" fill="#E08A2E" transform="rotate(-45 930 1155)"/>
-    <rect x="880" y="1140" width="100" height="30" fill="url(#grid)" transform="rotate(-45 930 1155)"/>
+  <!-- Washi Tapes strategically placed on corners and edges with shadows and patterns -->
+  <g filter="url(#tape-shadow)" opacity="0.93">
+    <!-- === TOP LEFT CORNER === -->
+    <!-- Orange Striped Tape -->
+    <g transform="translate(60, 45) rotate(-22)">
+      <use href="#torn-tape-h" fill="#E08A2E" />
+      <use href="#torn-tape-h" fill="url(#stripes)" />
+    </g>
+    <!-- Teal Dotted Tape -->
+    <g transform="translate(85, 80) rotate(-45)">
+      <use href="#torn-tape-h" fill="#4FA8A0" />
+      <use href="#torn-tape-h" fill="url(#dots)" />
+    </g>
 
-    <!-- Additional scattered small tapes on the borders -->
-    <rect x="450" y="-15" width="100" height="35" fill="#E08A2E" opacity="0.8" transform="rotate(5 500 -2)"/>
-    <rect x="450" y="-15" width="100" height="35" fill="url(#dots)" opacity="0.8" transform="rotate(5 500 -2)"/>
+    <!-- === TOP RIGHT CORNER === -->
+    <!-- Teal Gridded Tape -->
+    <g transform="translate(940, 45) rotate(22)">
+      <use href="#torn-tape-h" fill="#4FA8A0" />
+      <use href="#torn-tape-h" fill="url(#grid)" />
+    </g>
+    <!-- Red Striped Tape -->
+    <g transform="translate(915, 80) rotate(45)">
+      <use href="#torn-tape-h" fill="#D9534F" />
+      <use href="#torn-tape-h" fill="url(#stripes)" />
+    </g>
 
-    <rect x="470" y="1235" width="110" height="35" fill="#4FA8A0" opacity="0.8" transform="rotate(-8 525 1250)"/>
-    <rect x="470" y="1235" width="110" height="35" fill="url(#stripes)" opacity="0.8" transform="rotate(-8 525 1250)"/>
-    
-    <rect x="-15" y="550" width="40" height="120" fill="#C8A24A" opacity="0.8" transform="rotate(3 5 610)"/>
-    <rect x="-15" y="550" width="40" height="120" fill="url(#grid)" opacity="0.8" transform="rotate(3 5 610)"/>
+    <!-- === BOTTOM LEFT CORNER === -->
+    <!-- Red Dotted Tape -->
+    <g transform="translate(65, 1205) rotate(22)">
+      <use href="#torn-tape-h" fill="#D9534F" />
+      <use href="#torn-tape-h" fill="url(#dots)" />
+    </g>
+    <!-- Gold Starry Tape -->
+    <g transform="translate(95, 1170) rotate(48)">
+      <use href="#torn-tape-h" fill="#C8A24A" />
+      <use href="#torn-tape-h" fill="url(#stars)" />
+    </g>
 
-    <rect x="975" y="650" width="45" height="110" fill="#D9534F" opacity="0.8" transform="rotate(-5 990 700)"/>
-    <rect x="975" y="650" width="45" height="110" fill="url(#dots)" opacity="0.8" transform="rotate(-5 990 700)"/>
+    <!-- === BOTTOM RIGHT CORNER === -->
+    <!-- Gold Striped Tape -->
+    <g transform="translate(935, 1205) rotate(-22)">
+      <use href="#torn-tape-h" fill="#C8A24A" />
+      <use href="#torn-tape-h" fill="url(#stripes)" />
+    </g>
+    <!-- Orange Gridded Tape -->
+    <g transform="translate(905, 1170) rotate(-48)">
+      <use href="#torn-tape-h" fill="#E08A2E" />
+      <use href="#torn-tape-h" fill="url(#grid)" />
+    </g>
+
+    <!-- === ADDITIONAL SCATTERED TAPES ON THE EDGES === -->
+    <!-- Top Edge: Orange Dotted Tape -->
+    <g transform="translate(500, 30) rotate(5)">
+      <use href="#torn-tape-h" fill="#E08A2E" />
+      <use href="#torn-tape-h" fill="url(#dots)" />
+    </g>
+
+    <!-- Bottom Edge: Teal Starry Tape -->
+    <g transform="translate(500, 1220) rotate(-4)">
+      <use href="#torn-tape-h" fill="#4FA8A0" />
+      <use href="#torn-tape-h" fill="url(#stars)" />
+    </g>
+
+    <!-- Left Edge: Gold Gridded Vertical Tape -->
+    <g transform="translate(30, 625) rotate(-3)">
+      <use href="#torn-tape-v" fill="#C8A24A" />
+      <use href="#torn-tape-v" fill="url(#grid)" />
+    </g>
+
+    <!-- Right Edge: Red Striped Vertical Tape -->
+    <g transform="translate(970, 625) rotate(4)">
+      <use href="#torn-tape-v" fill="#D9534F" />
+      <use href="#torn-tape-v" fill="url(#stripes)" />
+    </g>
   </g>
 </svg>

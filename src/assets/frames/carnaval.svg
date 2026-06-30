@@ -1,54 +1,119 @@
 <svg width="1000" height="1250" viewBox="0 0 1000 1250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gold gradient for mask and star details -->
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C8A24A" />
+      <stop offset="50%" stop-color="#FDF1A9" />
+      <stop offset="100%" stop-color="#9A7B33" />
+    </linearGradient>
+
+    <!-- Ribbon Gradients -->
+    <linearGradient id="ribbon-green" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2F5D3A" />
+      <stop offset="50%" stop-color="#4C8C4A" />
+      <stop offset="100%" stop-color="#8CE89E" />
+    </linearGradient>
+
+    <linearGradient id="ribbon-red" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#801C1C" />
+      <stop offset="50%" stop-color="#C23B3B" />
+      <stop offset="100%" stop-color="#FFA8A8" />
+    </linearGradient>
+
+    <linearGradient id="mask-purple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4B2060" />
+      <stop offset="50%" stop-color="#7B3FA0" />
+      <stop offset="100%" stop-color="#C085E5" />
+    </linearGradient>
+
+    <!-- Shadow filter for ribbons and masks -->
+    <filter id="carnaval-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="3" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.4" />
+    </filter>
+
+    <!-- Ornate Venetian Mask Template (centered at 0,0) -->
+    <g id="carnaval-mask">
+      <!-- Feathers extending from behind -->
+      <path d="M-60 -20 Q -90 -70, -110 -80 Q -80 -60, -40 -30 Z" fill="#3B6FA0" />
+      <path d="M-40 -30 Q -60 -90, -70 -110 Q -50 -80, -20 -30 Z" fill="#D9A93B" />
+      <path d="M-20 -30 Q 0 -110, 0 -130 Q 10 -85, 10 -20 Z" fill="#C23B3B" />
+      <path d="M 20 -30 Q 60 -90, 70 -110 Q 50 -80, 20 -30 Z" fill="#D9A93B" />
+      <path d="M 60 -20 Q 90 -70, 110 -80 Q 80 -60, 40 -30 Z" fill="#3B6FA0" />
+      
+      <!-- Mask Base -->
+      <path d="M -80 -10 C -85 -30, -50 -45, -30 -30 C -15 -20, 0 -35, 0 -35 C 0 -35, 15 -20, 30 -30 C 50 -45, 85 -30, 80 -10 C 75 15, 45 25, 0 5 C -45 25, -75 15, -80 -10 Z" fill="url(#mask-purple)" stroke="url(#gold-grad)" stroke-width="3" filter="url(#carnaval-shadow)"/>
+      
+      <!-- Eye Openings (transparency cutouts using dark color for styling, but stylized) -->
+      <ellipse cx="-32" cy="-14" rx="16" ry="8" fill="#1A1815"/>
+      <ellipse cx="32" cy="-14" rx="16" ry="8" fill="#1A1815"/>
+      
+      <!-- Gold details/swirls on mask -->
+      <path d="M -70 -10 Q -50 15, -30 -10 Q -10 -25, 0 -5" fill="none" stroke="url(#gold-grad)" stroke-width="2" />
+      <path d="M 70 -10 Q 50 15, 30 -10 Q 10 -25, 0 -5" fill="none" stroke="url(#gold-grad)" stroke-width="2" />
+      <circle cx="0" cy="-22" r="5" fill="url(#gold-grad)" />
+      
+      <!-- Hanging Ribbons from side of the mask -->
+      <path d="M -75 0 C -90 30, -70 60, -85 90" fill="none" stroke="#C23B3B" stroke-width="3" />
+      <path d="M 75 0 C 90 30, 70 60, 85 90" fill="none" stroke="#3B6FA0" stroke-width="3" />
+    </g>
+  </defs>
+
   <!-- Dynamic colorful background border -->
   <rect x="20" y="20" width="960" height="1210" fill="none" stroke="#7B3FA0" stroke-width="12" rx="20"/>
-  <rect x="35" y="35" width="930" height="1180" fill="none" stroke="#D9A93B" stroke-width="6" rx="10"/>
+  <rect x="35" y="35" width="930" height="1180" fill="none" stroke="url(#gold-grad)" stroke-width="6" rx="10"/>
 
-  <g opacity="0.8">
-    <!-- Ribbon 1 -->
-    <path d="M 0 100 Q 150 -50, 300 150 T 600 50 T 1000 200" fill="none" stroke="#4C8C4A" stroke-width="18" stroke-linecap="round"/>
-    <path d="M 0 100 Q 150 -50, 300 150 T 600 50 T 1000 200" fill="none" stroke="#FFF" stroke-width="4" stroke-dasharray="10 20" stroke-linecap="round"/>
+  <!-- Ornate Ribbons (Serpentines) weaving around with 3D shadows -->
+  <g opacity="0.88" filter="url(#carnaval-shadow)">
+    <!-- Top Horizontal Ribbon -->
+    <path d="M -20 100 Q 150 -50, 300 150 T 600 50 T 1020 200" fill="none" stroke="url(#ribbon-green)" stroke-width="18" stroke-linecap="round"/>
+    <path d="M -20 100 Q 150 -50, 300 150 T 600 50 T 1020 200" fill="none" stroke="#FFF" stroke-width="4" stroke-dasharray="10 20" stroke-linecap="round"/>
     
-    <!-- Ribbon 2 -->
-    <path d="M 0 1100 Q 150 1250, 350 1050 T 700 1150 T 1000 1050" fill="none" stroke="#C23B3B" stroke-width="18" stroke-linecap="round"/>
-    <path d="M 0 1100 Q 150 1250, 350 1050 T 700 1150 T 1000 1050" fill="none" stroke="#FFF" stroke-width="4" stroke-dasharray="10 20" stroke-linecap="round"/>
+    <!-- Bottom Horizontal Ribbon -->
+    <path d="M -20 1100 Q 150 1250, 350 1050 T 700 1150 T 1020 1050" fill="none" stroke="url(#ribbon-red)" stroke-width="18" stroke-linecap="round"/>
+    <path d="M -20 1100 Q 150 1250, 350 1050 T 700 1150 T 1020 1050" fill="none" stroke="#FFF" stroke-width="4" stroke-dasharray="10 20" stroke-linecap="round"/>
 
-    <!-- Ribbon 3 -->
-    <path d="M 100 0 Q 0 150, 150 300 T 50 600 T 150 900 T 50 1250" fill="none" stroke="#3B6FA0" stroke-width="16" stroke-linecap="round"/>
-    <path d="M 100 0 Q 0 150, 150 300 T 50 600 T 150 900 T 50 1250" fill="none" stroke="#FFF" stroke-width="3" stroke-dasharray="8 15" stroke-linecap="round"/>
+    <!-- Left Vertical Ribbon -->
+    <path d="M 100 -20 Q 0 150, 150 300 T 50 600 T 150 900 T 50 1270" fill="none" stroke="#3B6FA0" stroke-width="16" stroke-linecap="round"/>
+    <path d="M 100 -20 Q 0 150, 150 300 T 50 600 T 150 900 T 50 1270" fill="none" stroke="#FFF" stroke-width="3" stroke-dasharray="8 15" stroke-linecap="round"/>
 
-    <!-- Ribbon 4 -->
-    <path d="M 900 0 Q 1000 200, 850 400 T 950 700 T 850 1000 T 950 1250" fill="none" stroke="#D9A93B" stroke-width="16" stroke-linecap="round"/>
-    <path d="M 900 0 Q 1000 200, 850 400 T 950 700 T 850 1000 T 950 1250" fill="none" stroke="#FFF" stroke-width="3" stroke-dasharray="8 15" stroke-linecap="round"/>
+    <!-- Right Vertical Ribbon -->
+    <path d="M 900 -20 Q 1000 200, 850 400 T 950 700 T 850 1000 T 950 1270" fill="none" stroke="url(#gold-grad)" stroke-width="16" stroke-linecap="round"/>
+    <path d="M 900 -20 Q 1000 200, 850 400 T 950 700 T 850 1000 T 950 1270" fill="none" stroke="#FFF" stroke-width="3" stroke-dasharray="8 15" stroke-linecap="round"/>
   </g>
 
-  <!-- Ornate Confetti explosion -->
+  <!-- Ornate Confetti explosion & sparkles -->
   <g>
     <!-- Stars -->
-    <polygon points="120,40 125,55 140,55 128,65 132,80 120,70 108,80 112,65 100,55 115,55" fill="#D9A93B"/>
+    <polygon points="120,40 125,55 140,55 128,65 132,80 120,70 108,80 112,65 100,55 115,55" fill="url(#gold-grad)" />
     <polygon points="850,1150 855,1165 870,1165 858,1175 862,1190 850,1180 838,1190 842,1175 830,1165 845,1165" fill="#C23B3B"/>
     <polygon points="150,1180 155,1190 165,1190 158,1198 160,1210 150,1202 140,1210 142,1198 135,1190 145,1190" fill="#3B6FA0"/>
     <polygon points="880,50 885,60 895,60 888,68 890,80 880,72 870,80 872,68 865,60 875,60" fill="#7B3FA0"/>
 
     <!-- Multi-colored circles & squares -->
-    <circle cx="80" cy="80" r="12" fill="#C23B3B"/>
+    <circle cx="80" cy="180" r="12" fill="#C23B3B"/>
     <rect x="200" y="50" width="15" height="15" fill="#4C8C4A" transform="rotate(25 200 50)"/>
     <circle cx="280" cy="70" r="8" fill="#7B3FA0"/>
     <rect x="350" y="30" width="12" height="12" fill="#3B6FA0" transform="rotate(45 350 30)"/>
-    <circle cx="450" cy="80" r="15" fill="#D9A93B"/>
+    <circle cx="450" cy="80" r="15" fill="url(#gold-grad)"/>
     <rect x="550" y="40" width="18" height="18" fill="#C23B3B" transform="rotate(15 550 40)"/>
     <circle cx="650" cy="60" r="10" fill="#4C8C4A"/>
     <circle cx="750" cy="90" r="14" fill="#3B6FA0"/>
     <rect x="800" y="30" width="14" height="14" fill="#7B3FA0" transform="rotate(60 800 30)"/>
-    <circle cx="950" cy="90" r="12" fill="#D9A93B"/>
+    <circle cx="920" cy="180" r="12" fill="url(#gold-grad)"/>
 
-    <circle cx="60" cy="1150" r="14" fill="#D9A93B"/>
+    <!-- Bottom Confetti -->
+    <circle cx="60" cy="1080" r="14" fill="url(#gold-grad)"/>
     <rect x="220" y="1180" width="16" height="16" fill="#7B3FA0" transform="rotate(10 220 1180)"/>
     <circle cx="320" cy="1160" r="10" fill="#C23B3B"/>
     <circle cx="420" cy="1190" r="12" fill="#3B6FA0"/>
     <rect x="500" y="1150" width="20" height="20" fill="#4C8C4A" transform="rotate(40 500 1150)"/>
-    <circle cx="600" cy="1180" r="8" fill="#D9A93B"/>
+    <circle cx="600" cy="1180" r="8" fill="url(#gold-grad)"/>
     <rect x="700" y="1160" width="14" height="14" fill="#C23B3B" transform="rotate(75 700 1160)"/>
     <circle cx="800" cy="1190" r="16" fill="#7B3FA0"/>
-    <circle cx="920" cy="1150" r="12" fill="#4C8C4A"/>
+    <circle cx="940" cy="1080" r="12" fill="#4C8C4A"/>
   </g>
+
+  <!-- Ornate Venetian/Carnival Masks in Top Corners -->
+  <use href="#carnaval-mask" x="120" y="110" />
+  <use href="#carnaval-mask" x="880" y="110" transform="scale(-1, 1) translate(-1760, 0)" />
 </svg>

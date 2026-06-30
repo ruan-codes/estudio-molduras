@@ -26,6 +26,15 @@ import pascoaSvg from '../assets/frames/pascoa.svg'
 import anoNovoSvg from '../assets/frames/anonovo.svg'
 
 export const frames = [
+  // --- Sem decoração --------------------------------------------------------
+  {
+    id: 'none',
+    name: 'Sem moldura',
+    desc: 'Foto pura, sem decoração',
+    category: 'Gerais',
+    src: null,
+  },
+
   // --- Gerais ---------------------------------------------------------------
   {
     id: 'classico',
