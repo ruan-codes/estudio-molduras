@@ -261,7 +261,7 @@ body {
   border-radius: 2px;
   overflow: hidden;
   background: #0c0b0a;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 9 / 16;
   max-height: 70vh;
   margin-inline: auto;
 }
@@ -340,11 +340,13 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
-  /* fill em vez de contain: o SVG foi desenhado exatamente pra proporção 4:5
-     do vf-frame, então preencher toda a área dá o visual correto */
+  /* fill em vez de contain: a moldura precisa acompanhar exatamente a área
+     final de Story, sem barras laterais ou sobras. */
   object-fit: fill;
   pointer-events: none;
   z-index: 3;
+  transform: scale(1.07);
+  transform-origin: center;
   animation: vfFadeIn 0.2s ease;
 }
 

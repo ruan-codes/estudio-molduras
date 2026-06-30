@@ -28,12 +28,13 @@ export function drawCoverImage(ctx, img, x, y, w, h) {
   ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h)
 }
 
-// Renderiza a composição final no canvas: foto cobrindo toda a área +
-// moldura (PNG/SVG com janela transparente) sobreposta + legenda opcional.
-export function renderComposite({ canvas, photoImg, frameImg, caption, maxWidth = 1200 }) {
-  const ratio = frameImg ? frameImg.width / frameImg.height : 4 / 5
-  const width = maxWidth
-  const height = Math.round(maxWidth / ratio)
+export const STORY_WIDTH = 1080
+export const STORY_HEIGHT = 1920
+const FRAME_BLEED = 1.07
+
+// Renderiza a composição final no tamanho de Story do Instagram:
+// 1080x1920px, proporção 9:16.
+export function renderComposite({ canvas, photoImg, frameImg, caption, width = STORY_WIDTH, height = STORY_HEIGHT }) {
 
   canvas.width = width
   canvas.height = height
@@ -43,7 +44,9 @@ export function renderComposite({ canvas, photoImg, frameImg, caption, maxWidth 
   drawCoverImage(ctx, photoImg, 0, 0, width, height)
 
   if (frameImg) {
-    ctx.drawImage(frameImg, 0, 0, width, height)
+    const bleedWidth = width * FRAME_BLEED
+    const bleedHeight = height * FRAME_BLEED
+    ctx.drawImage(frameImg, (width - bleedWidth) / 2, (height - bleedHeight) / 2, bleedWidth, bleedHeight)
   }
 
   if (caption && caption.trim()) {

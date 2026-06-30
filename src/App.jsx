@@ -94,8 +94,21 @@ export default function App() {
     reader.readAsDataURL(file)
   }
 
-  function handleUploadFrame(file) {
-    const url = URL.createObjectURL(file)
+  async function createFrameUrl(file) {
+    if (file.type === 'image/svg+xml' || /\.svg$/i.test(file.name)) {
+      const svg = await file.text()
+      const normalizedSvg = /\bpreserveAspectRatio=/i.test(svg)
+        ? svg.replace(/\bpreserveAspectRatio=(["']).*?\1/i, 'preserveAspectRatio="none"')
+        : svg.replace(/<svg\b/i, '<svg preserveAspectRatio="none"')
+      const blob = new Blob([normalizedSvg], { type: 'image/svg+xml' })
+      return URL.createObjectURL(blob)
+    }
+
+    return URL.createObjectURL(file)
+  }
+
+  async function handleUploadFrame(file) {
+    const url = await createFrameUrl(file)
     blobUrlsRef.current.push(url)
     const id = `custom-${Date.now()}`
     setCustomFrames((prev) => [
@@ -111,6 +124,17 @@ export default function App() {
     link.download = 'foto-com-moldura.png'
     link.href = canvasRef.current.toDataURL('image/png')
     link.click()
+  }
+
+  function handleCancelPhoto() {
+    setPhotoImg(null)
+    setHasResult(false)
+    setStep(1)
+    const canvas = canvasRef.current
+    if (canvas) {
+      const ctx = canvas.getContext('2d')
+      ctx?.clearRect(0, 0, canvas.width, canvas.height)
+    }
   }
 
   function handlePrint() {
@@ -186,6 +210,7 @@ export default function App() {
             onPrintLayoutChange={setPrintLayout}
             onDownload={handleDownload}
             onPrint={handlePrint}
+            onCancelPhoto={handleCancelPhoto}
             canDownload={hasResult}
           />
         </div>
