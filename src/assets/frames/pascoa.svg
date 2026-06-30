@@ -1,39 +1,75 @@
 <svg width="1000" height="1250" viewBox="0 0 1000 1250" xmlns="http://www.w3.org/2000/svg">
-  <rect x="46" y="60" width="908" height="1130" fill="none" stroke="#E8B7C7" stroke-width="5"/>
+  <!-- Delicate ornate border -->
+  <rect x="30" y="30" width="940" height="1190" fill="none" stroke="#E8B7C7" stroke-width="12" rx="15"/>
+  <rect x="45" y="45" width="910" height="1160" fill="none" stroke="#B7D9C9" stroke-width="4" rx="10"/>
+  <rect x="55" y="55" width="890" height="1140" fill="none" stroke="#F6D9A0" stroke-width="2" rx="5"/>
 
+  <!-- Vines wrapping around the frame -->
+  <path d="M 40 100 Q 80 150, 40 200 T 40 300 T 40 400 T 40 500 T 40 600 T 40 700 T 40 800 T 40 900 T 40 1000 T 40 1100" fill="none" stroke="#B7D9C9" stroke-width="4"/>
+  <path d="M 960 100 Q 920 150, 960 200 T 960 300 T 960 400 T 960 500 T 960 600 T 960 700 T 960 800 T 960 900 T 960 1000 T 960 1100" fill="none" stroke="#B7D9C9" stroke-width="4"/>
+  
+  <g fill="#E8B7C7">
+    <!-- Little flowers on vines -->
+    <circle cx="65" cy="150" r="6"/> <circle cx="35" cy="250" r="5"/> <circle cx="65" cy="350" r="6"/>
+    <circle cx="35" cy="450" r="5"/> <circle cx="65" cy="550" r="6"/> <circle cx="35" cy="650" r="5"/>
+    <circle cx="65" cy="750" r="6"/> <circle cx="35" cy="850" r="5"/> <circle cx="65" cy="950" r="6"/>
+    
+    <circle cx="935" cy="150" r="6"/> <circle cx="965" cy="250" r="5"/> <circle cx="935" cy="350" r="6"/>
+    <circle cx="965" cy="450" r="5"/> <circle cx="935" cy="550" r="6"/> <circle cx="965" cy="650" r="5"/>
+    <circle cx="935" cy="750" r="6"/> <circle cx="965" cy="850" r="5"/> <circle cx="935" cy="950" r="6"/>
+  </g>
+
+  <!-- Ornate Easter Eggs -->
   <g>
-    <g transform="translate(80,90) rotate(-12)">
-      <ellipse cx="0" cy="0" rx="26" ry="36" fill="#F6D9A0"/>
-      <path d="M-22 -6 Q 0 -16, 22 -6" stroke="#E8B7C7" stroke-width="5" fill="none"/>
-      <path d="M-18 10 Q 0 2, 18 10" stroke="#B7D9C9" stroke-width="5" fill="none"/>
+    <!-- Top Left Cluster -->
+    <g transform="translate(100,100) rotate(-15)">
+      <ellipse cx="0" cy="0" rx="35" ry="48" fill="#F6D9A0"/>
+      <path d="M-30 -10 Q 0 -25, 30 -10" stroke="#E8B7C7" stroke-width="8" fill="none"/>
+      <path d="M-30 10 Q 0 -5, 30 10" stroke="#B7D9C9" stroke-width="8" fill="none" stroke-dasharray="6 6"/>
+      <circle cx="0" cy="25" r="5" fill="#E8B7C7"/>
+      <circle cx="-15" cy="20" r="4" fill="#B7D9C9"/>
+      <circle cx="15" cy="20" r="4" fill="#B7D9C9"/>
     </g>
-    <g transform="translate(920,90) rotate(12)">
-      <ellipse cx="0" cy="0" rx="26" ry="36" fill="#B7D9C9"/>
-      <path d="M-22 -6 Q 0 -16, 22 -6" stroke="#FBF3DD" stroke-width="5" fill="none"/>
-      <circle cx="0" cy="10" r="5" fill="#E8B7C7"/>
-      <circle cx="-12" cy="14" r="4" fill="#E8B7C7"/>
-      <circle cx="12" cy="14" r="4" fill="#E8B7C7"/>
+    
+    <!-- Top Right Cluster -->
+    <g transform="translate(900,100) rotate(20)">
+      <ellipse cx="0" cy="0" rx="30" ry="42" fill="#BFD7EE"/>
+      <path d="M-25 0 Q 0 -15, 25 0 M -25 10 Q 0 -5, 25 10" stroke="#E8B7C7" stroke-width="4" fill="none"/>
+      <circle cx="0" cy="-20" r="6" fill="#F6D9A0"/>
+      <circle cx="0" cy="25" r="6" fill="#F6D9A0"/>
     </g>
-    <g transform="translate(80,1160) rotate(10)">
-      <ellipse cx="0" cy="0" rx="24" ry="34" fill="#BFD7EE"/>
-      <path d="M-18 4 Q 0 -6, 18 4" stroke="#FBF3DD" stroke-width="5" fill="none"/>
-      <path d="M-16 16 Q 0 8, 16 16" stroke="#FBF3DD" stroke-width="5" fill="none"/>
+
+    <!-- Bottom Left Cluster -->
+    <g transform="translate(120,1130) rotate(10)">
+      <ellipse cx="0" cy="0" rx="32" ry="45" fill="#E8B7C7"/>
+      <path d="M-28 -5 Q 0 5, 28 -5 M -28 15 Q 0 25, 28 15" stroke="#FBF3DD" stroke-width="6" fill="none"/>
+      <path d="M-25 -20 Q 0 -10, 25 -20" stroke="#B7D9C9" stroke-width="6" fill="none" stroke-dasharray="5 5"/>
     </g>
-    <g transform="translate(920,1160) rotate(-10)">
-      <ellipse cx="0" cy="0" rx="24" ry="34" fill="#F6D9A0"/>
-      <circle cx="0" cy="-6" r="4" fill="#E8B7C7"/>
-      <circle cx="-10" cy="2" r="4" fill="#E8B7C7"/>
-      <circle cx="10" cy="2" r="4" fill="#E8B7C7"/>
-      <circle cx="0" cy="12" r="4" fill="#E8B7C7"/>
+    
+    <!-- Bottom Right Cluster -->
+    <g transform="translate(880,1140) rotate(-15)">
+      <ellipse cx="0" cy="0" rx="38" ry="52" fill="#B7D9C9"/>
+      <path d="M-32 -15 L32 -15 M-35 5 L35 5 M-32 25 L32 25" stroke="#FBF3DD" stroke-width="6" fill="none"/>
+      <circle cx="0" cy="-5" r="5" fill="#F6D9A0"/>
+      <circle cx="-15" cy="-5" r="5" fill="#F6D9A0"/>
+      <circle cx="15" cy="-5" r="5" fill="#F6D9A0"/>
+      <circle cx="0" cy="15" r="5" fill="#E8B7C7"/>
+      <circle cx="-15" cy="15" r="5" fill="#E8B7C7"/>
+      <circle cx="15" cy="15" r="5" fill="#E8B7C7"/>
     </g>
   </g>
 
+  <!-- Intricate Grass & Flowers at bottom -->
   <g stroke="#B7D9C9" stroke-width="6" stroke-linecap="round">
-    <path d="M380 1220 q 6 -24 0 -40"/>
-    <path d="M410 1224 q -6 -28 4 -44"/>
-    <path d="M440 1220 q 8 -22 -2 -38"/>
-    <path d="M560 1220 q 6 -24 0 -40"/>
-    <path d="M590 1224 q -6 -28 4 -44"/>
-    <path d="M620 1220 q 8 -22 -2 -38"/>
+    <path d="M 350 1200 Q 360 1150 370 1200 Q 380 1160 390 1200 Q 400 1140 410 1200 Q 420 1170 430 1200 Q 440 1150 450 1200" fill="none"/>
+    <path d="M 550 1200 Q 560 1150 570 1200 Q 580 1160 590 1200 Q 600 1140 610 1200 Q 620 1170 630 1200 Q 640 1150 650 1200" fill="none"/>
+  </g>
+  <g fill="#F6D9A0">
+    <circle cx="380" cy="1150" r="8"/> <circle cx="370" cy="1145" r="5"/> <circle cx="390" cy="1145" r="5"/> <circle cx="380" cy="1135" r="5"/>
+    <circle cx="600" cy="1130" r="8"/> <circle cx="590" cy="1125" r="5"/> <circle cx="610" cy="1125" r="5"/> <circle cx="600" cy="1115" r="5"/>
+  </g>
+  <g fill="#E8B7C7">
+    <circle cx="430" cy="1160" r="7"/> <circle cx="422" cy="1156" r="4"/> <circle cx="438" cy="1156" r="4"/> <circle cx="430" cy="1148" r="4"/>
+    <circle cx="570" cy="1155" r="7"/> <circle cx="562" cy="1151" r="4"/> <circle cx="578" cy="1151" r="4"/> <circle cx="570" cy="1143" r="4"/>
   </g>
 </svg>
