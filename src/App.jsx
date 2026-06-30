@@ -16,7 +16,6 @@ export default function App() {
   const printImgRef = useRef(null)
   const photoFileInputRef = useRef(null)
   const frameFileInputRef = useRef(null)
-  // Tracks blob URLs so we can revoke them on unmount (#2 — memory leak fix)
   const blobUrlsRef = useRef([])
 
   const {
@@ -28,18 +27,14 @@ export default function App() {
     switchCamera,
   } = useCamera(videoRef)
 
-  const [photoImg, setPhotoImg] = useState(null) // HTMLImageElement da foto atual
+  const [photoImg, setPhotoImg] = useState(null)
   const [customFrames, setCustomFrames] = useState([])
   const [activeFrameId, setActiveFrameId] = useState(builtInFrames[0]?.id ?? null)
   const [caption, setCaption] = useState('')
   const [hasResult, setHasResult] = useState(false)
   const [printLayout, setPrintLayout] = useState('single')
-  // Tracks when the canvas is being composited so we can show a spinner (#4)
   const [rendering, setRendering] = useState(false)
 
-  // Etapa do fluxo mobile (1 Capturar · 2 Moldura · 3 Revelar). No desktop
-  // esse estado é ignorado visualmente — lá as duas áreas ficam sempre
-  // visíveis lado a lado (ver regras dentro de @media no global.css).
   const [step, setStep] = useState(1)
   const nextStep = () => setStep((s) => Math.min(3, s + 1))
   const prevStep = () => setStep((s) => Math.max(1, s - 1))
@@ -47,13 +42,11 @@ export default function App() {
   const allFrames = [...builtInFrames, ...customFrames]
   const activeFrame = allFrames.find((f) => f.id === activeFrameId) || null
 
-  // Recompõe o canvas sempre que foto, moldura ou legenda mudarem
   useEffect(() => {
     async function run() {
       if (!photoImg || !canvasRef.current) return
       setRendering(true)
       try {
-        // src === null significa "Sem moldura" (#7)
         const frameImg = activeFrame?.src ? await loadImage(activeFrame.src) : null
         renderComposite({ canvas: canvasRef.current, photoImg, frameImg, caption })
         setHasResult(true)
@@ -64,7 +57,6 @@ export default function App() {
     run()
   }, [photoImg, activeFrame, caption])
 
-  // Revoga todos os blob URLs criados para molduras personalizadas (#2)
   useEffect(() => {
     return () => {
       blobUrlsRef.current.forEach((url) => URL.revokeObjectURL(url))
@@ -72,15 +64,12 @@ export default function App() {
   }, [])
 
   async function handleToggleCamera() {
-    if (cameraActive) {
-      stopCamera()
-      return
-    }
+    if (cameraActive) { stopCamera(); return }
     try {
       await startCamera()
       setHasResult(false)
     } catch {
-      // erro já visível via cameraError do hook (#3)
+      // erro visível via cameraError
     }
   }
 
@@ -88,7 +77,7 @@ export default function App() {
     const img = await captureVideoFrame(videoRef.current, facingMode === 'user')
     setPhotoImg(img)
     stopCamera()
-    setStep(2) // depois de capturar, segue automaticamente pra escolha de moldura
+    setStep(2)
   }
 
   function handleUploadClick() {
@@ -100,14 +89,14 @@ export default function App() {
     reader.onload = async (ev) => {
       const img = await loadImage(ev.target.result)
       setPhotoImg(img)
-      setStep(2) // mesma lógica de avanço automático ao enviar uma foto
+      setStep(2)
     }
     reader.readAsDataURL(file)
   }
 
   function handleUploadFrame(file) {
     const url = URL.createObjectURL(file)
-    blobUrlsRef.current.push(url) // registra para revogação posterior (#2)
+    blobUrlsRef.current.push(url)
     const id = `custom-${Date.now()}`
     setCustomFrames((prev) => [
       ...prev,
@@ -126,13 +115,11 @@ export default function App() {
 
   function handlePrint() {
     if (!hasResult || !canvasRef.current || !printImgRef.current) return
-
     const sourceCanvas = canvasRef.current
     const targetCanvas =
       printLayout === 'single'
         ? sourceCanvas
         : renderPrintStrip({ sourceCanvas, copies: printLayout === 'strip4' ? 4 : 3 })
-
     const img = printImgRef.current
     img.onload = () => window.print()
     img.src = targetCanvas.toDataURL('image/png')
@@ -145,23 +132,24 @@ export default function App() {
     <div className="app" data-active-step={step}>
       <Header />
 
-      <Viewfinder
-        videoRef={videoRef}
-        canvasRef={canvasRef}
-        cameraActive={cameraActive}
-        hasResult={hasResult}
-        frameCounterLabel={frameCounterLabel}
-        mirrorPreview={cameraActive && facingMode === 'user'}
-        rendering={rendering}
-        cameraError={cameraError}
-        activeFrame={activeFrame}
-      />
-
-      {/* Barra de progresso do wizard — só aparece em telas mobile */}
-      <StepProgress step={step} onBack={prevStep} />
-
       <div className="stage">
-        <div>
+        {/* Coluna esquerda: viewfinder + controles de câmera */}
+        <div className="stage-left">
+          <Viewfinder
+            videoRef={videoRef}
+            canvasRef={canvasRef}
+            cameraActive={cameraActive}
+            hasResult={hasResult}
+            frameCounterLabel={frameCounterLabel}
+            mirrorPreview={cameraActive && facingMode === 'user'}
+            rendering={rendering}
+            cameraError={cameraError}
+            activeFrame={activeFrame}
+          />
+
+          {/* Barra de progresso do wizard — só aparece em telas mobile */}
+          <StepProgress step={step} onBack={prevStep} />
+
           <CameraActions
             cameraActive={cameraActive}
             onToggleCamera={handleToggleCamera}
@@ -172,6 +160,24 @@ export default function App() {
             canShoot={cameraActive}
             fileInputRef={photoFileInputRef}
           />
+        </div>
+
+        {/* Coluna direita: seleção de moldura + resultado */}
+        <div className="stage-right">
+          <div data-step="2">
+            <FrameStrip
+              frames={allFrames}
+              activeFrameId={activeFrameId}
+              onSelect={setActiveFrameId}
+              onUploadFrame={handleUploadFrame}
+              fileInputRef={frameFileInputRef}
+            />
+            <div className="controls controls-primary wizard-advance">
+              <button className="btn-primary" style={{ flex: 1 }} onClick={nextStep}>
+                Avançar → Revelar
+              </button>
+            </div>
+          </div>
 
           <ResultPanel
             caption={caption}
@@ -183,27 +189,9 @@ export default function App() {
             canDownload={hasResult}
           />
         </div>
-
-        <div data-step="2">
-          <FrameStrip
-            frames={allFrames}
-            activeFrameId={activeFrameId}
-            onSelect={setActiveFrameId}
-            onUploadFrame={handleUploadFrame}
-            fileInputRef={frameFileInputRef}
-          />
-          {/* botão de avançar — só existe visualmente no fluxo mobile */}
-          <div className="controls controls-primary wizard-advance">
-            <button className="btn-primary" style={{ flex: 1 }} onClick={nextStep}>
-              Avançar → Revelar
-            </button>
-          </div>
-        </div>
       </div>
 
-      {/* Usada só durante a impressão — fica escondida na tela normal (ver .print-only no CSS) */}
       <img ref={printImgRef} className="print-only" alt="" />
-
       <Footer />
     </div>
   )
